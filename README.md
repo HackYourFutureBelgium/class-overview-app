@@ -13,13 +13,14 @@ This app is not designed to manage an HYF school.  It does not help to manage ca
 All it does is provide an easy interface to see:
 * How far a class is through their HYF
 * What assignments are part of each module
-* Links to each student's homework repository, if the repo exists. and live projects if the assignment requires it
+* Links to each student's homework repository, whether or not it exists. and live projects if the assignment requires it
 * Give code reviews to students (the app can permalink to specific students and modules for sharing this work between coaches and alumni)
 * Learning names & faces
 
 Things it does not do:
 * Give a completely accurate view of homework process or quality, the module project boards are
 * Provide information on how well student homework is done
+* Say whether or not a link is 404, all buttons appear not matter what
 * Have any info on if assignments are completed on time, or in their entirety
 * Support branch checks, Everything reads from master. maybe at some point branches can be added to the schema, but that complicates without much benefit at the moment.  Branches can also be part of a more comprehensive HYF management app and stay out of this simple code-review app.  We also aren't assigning specific branch names, so this wouldn't help at this point. and assigning branch names at any point might be too prescriptive.  and anyway, issues on project boards have links to specific branches, and we encourage them to come up with their own branching schemes.
 * Link to specific assignments' issue cards.  To prescriptive, likely to break, then it's just clutter.

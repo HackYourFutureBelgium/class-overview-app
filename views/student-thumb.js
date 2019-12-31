@@ -11,7 +11,7 @@ export default async (state, student) => {
   studentImg.alt = student.name + ' - ' + student.userName;
   studentImg.style = 'height:130px;width:130px;';
   try {
-    const userObjPromise = await fetch('https://cors-anywhere.herokuapp.com/' + 'https://api.github.com/users/' + student.userName);
+    const userObjPromise = await fetch('https://api.github.com/users/' + student.userName);
     const userData = await userObjPromise.json();
     studentImg.src = userData.avatar_url;
   } catch (err) {

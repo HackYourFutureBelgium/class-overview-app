@@ -13,15 +13,14 @@ This app is not designed to manage an HYF school.  It does not help to manage ca
 All it does is provide an easy interface to see:
 * How far a class is through their HYF
 * What assignments are part of each module
-* Links to each student's homework repository
+* Links to each student's homework repository, if the repo exists. and live projects if the assignment requires it
 * Give code reviews to students (the app can permalink to specific students and modules for sharing this work between coaches and alumni)
 * Learning names & faces
 
 Things it does not do:
 * Give a completely accurate view of homework process or quality, the module project boards are
-* If students don't turn on GitHub Pages the app does not recognize that the repository exists
-  1. because of GitHub API rate limits when you are not authenticated
-  1. because
+* Provide information on how well student homework is done
+* Have any info on if assignments are completed on time, or in their entirety
 
 
 ---

@@ -7,6 +7,7 @@ import home from "./views/home.js"
 
 export default async (state, root) => {
 
+
   if (!state.root) {
     state.root = root instanceof Element
       ? root

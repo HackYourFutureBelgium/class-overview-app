@@ -20,9 +20,9 @@
       ],
       "description": "optional, defaults to true. if string, a URL where to find the source code. if true, a github link will be generated from the repo/name and student.userName. if false, no source link will be generated.  Strings will have all instances of '<user-name>' replaced with the student's github user name, '<class-name>' will be replaced with the class repo's name"
     },
-    "directories": {
+    "endpoints": {
       "type": "array",
-      "description": "a list of sub-folders to be completed. there will be no api check, if the repo exists buttons to the source code will be rendered. if the repo is live, live links will also be rendered",
+      "description": "a list of sub-folders/files to be completed. there will be no api check, if the repo exists buttons to the source code will be rendered. if the repo is live, live links will also be rendered",
       "items": {
         "type": "string",
         "description": "relative paths to the directory/file expected"

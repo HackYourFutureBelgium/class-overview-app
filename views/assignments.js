@@ -1,6 +1,6 @@
 import assignment from './assignment.js'
 
-export default async (module, student) => {
+export default (module, student) => {
 
   const assignmentsUl = document.createElement('ul');
 
@@ -13,7 +13,7 @@ export default async (module, student) => {
 
     const projUl = document.createElement('ul');
     for (const project of module.projects) {
-      projUl.appendChild(await assignment(state, project, student));
+      projUl.appendChild(assignment(state, project, student));
     }
     projLi.appendChild(projUl);
 
@@ -29,7 +29,7 @@ export default async (module, student) => {
 
     const exUl = document.createElement('ul');
     for (const exercise of module.exercises) {
-      exUl.appendChild(await assignment(state, exercise, student));
+      exUl.appendChild(assignment(state, exercise, student));
     }
     exLi.appendChild(exUl);
 
@@ -45,7 +45,7 @@ export default async (module, student) => {
 
     const assUl = document.createElement('ul');
     for (const assessment of module.assessments) {
-      assUl.appendChild(await assignment(state, assessment, student));
+      assUl.appendChild(assignment(state, assessment, student));
     }
     assLi.appendChild(assUl);
 

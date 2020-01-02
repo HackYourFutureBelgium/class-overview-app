@@ -2,7 +2,7 @@ const studentCache = new Map();
 const assignmentCache = new Map();
 const containerCache = new Map();
 
-export default async (state, assignment, student) => {
+export default (state, assignment, student) => {
 
   // won't recheck for every navigation
   // only when page is refreshed
@@ -72,9 +72,9 @@ export default async (state, assignment, student) => {
   };
 
 
-  // assume all directories exist if the repo exists
-  if (Array.isArray(assignment.directories) && assignment.directories.length > 0) {
-    const directoriesUl = assignment.directories
+  // assume all endpoints exist if the repo exists
+  if (Array.isArray(assignment.endpoints) && assignment.endpoints.length > 0) {
+    const endpointsUl = assignment.endpoints
       .map(directory => {
         const directoryButton = document.createElement('button');
         directoryButton.innerHTML = 'review directory';
@@ -94,7 +94,7 @@ export default async (state, assignment, student) => {
         return ul;
       }, document.createElement('ul'));
 
-    container.appendChild(directoriesUl);
+    container.appendChild(endpointsUl);
   }
 
 

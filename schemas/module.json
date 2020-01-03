@@ -38,9 +38,9 @@
         "description": "an overview of what the dashboard for look for in each assessment"
       }
     },
-    "repo": {
+    "userName": {
       "type": "string",
-      "description": "optional.  if present, this is used to generate link to repo. otherwise name is used"
+      "description": "optional.  if present, this is used to generate link to repo. otherwise state.userName is used. This is useful if you are using a fork of some module"
     }
   }
 }

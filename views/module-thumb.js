@@ -5,7 +5,6 @@ export default (state, module) => {
 
   if (cache.has(module)) return cache.get(module);
 
-
   const title = document.createElement('h1');
   title.innerHTML = module.name;
 
@@ -30,7 +29,7 @@ export default (state, module) => {
   const repoA = document.createElement('a');
   repoA.target = '_blank';
   const repoName = module.repo || module.name;
-  repoA.href = "https://github.com/" + state.userName + "/" + repoName;
+  repoA.href = "https://github.com/" + (module.userName || state.userName) + "/" + repoName;
   repoA.appendChild(repoButton);
 
 

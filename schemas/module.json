@@ -41,6 +41,23 @@
     "userName": {
       "type": "string",
       "description": "optional.  if present, this is used to generate link to repo. otherwise state.userName is used. This is useful if you are using a fork of some module"
+    },
+    "coaches": {
+      "type": "array",
+      "description": "all coaches that helped to teach this module",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "their name"
+          },
+          "userName": {
+            "type": "string",
+            "description": "their github user name"
+          }
+        }
+      }
     }
   }
 }

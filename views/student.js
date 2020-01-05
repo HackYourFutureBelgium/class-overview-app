@@ -11,8 +11,8 @@ export default async (state, student) => {
   container.appendChild(renderedStudentThumb);
 
   for (const module of state.modules) {
-    const renderedModuleThumb = await moduleThumb(state, module);
-    const renderedStudentAssignments = await assignments(module, student)
+    const renderedModuleThumb = moduleThumb(state, module);
+    const renderedStudentAssignments = assignments(module, student)
 
 
 

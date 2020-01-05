@@ -1,21 +1,7 @@
-const studentCache = new Map();
-const assignmentCache = new Map();
-const containerCache = new Map();
+// const assignmentCache = new Map();
+// const containerCache = new Map();
 
 export default (state, assignment, student) => {
-
-  // won't recheck for every navigation
-  // only when page is refreshed
-  const studentSymbol = studentCache.has(student)
-    ? studentCache.get(student)
-    : Symbol(student);
-  if (assignmentCache.has(studentSymbol)) {
-    return containerCache.get(assignmentCache.get(studentSymbol));
-  } else {
-    studentCache.set(student, studentSymbol);
-    assignmentCache.set(studentSymbol, Symbol(assignment));
-  }
-  console.log(3)
 
   const container = document.createElement('li');
   container.style = 'padding-bottom:1%';
@@ -132,7 +118,6 @@ export default (state, assignment, student) => {
     container.appendChild(ul);
   }
 
-  containerCache.set(assignmentCache.get(studentSymbol), container);
 
   return container;
 

@@ -17,9 +17,9 @@ export default async (state, root) => {
   }
 
   if (state.currentStudent && state.currentModule) {
-    state.root.appendChild(await studentThumb(state.currentStudent));
+    state.root.appendChild(await studentThumb(state, state.currentStudent));
     state.root.appendChild(document.createElement('hr'));
-    state.root.appendChild(await moduleThumb(state.currentModule));
+    state.root.appendChild(await moduleThumb(state, state.currentModule));
     state.root.appendChild(await assignments(state.currentModule, state.currentStudent));
   } else if (state.currentStudent) {
     state.root.appendChild(await renderStudent(state, state.currentStudent));

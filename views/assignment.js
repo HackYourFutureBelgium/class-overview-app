@@ -65,14 +65,28 @@ export default (state, assignment, student) => {
         const directoryButton = document.createElement('button');
         directoryButton.innerHTML = 'review directory';
 
-        const directoryA = document.createElement('a');
-        directoryA.target = '_blank';
-        directoryA.href = repoURL + '/tree/master/' + directory;
-        directoryA.appendChild(directoryButton);
 
         const directoryLi = document.createElement('li');
         directoryLi.appendChild(document.createTextNode(directory));
-        directoryLi.appendChild(directoryA);
+
+        if (assignment.source !== false) {
+          const directoryA = document.createElement('a');
+          directoryA.target = '_blank';
+          directoryA.href = repoURL + '/tree/master/' + directory;
+          directoryA.appendChild(directoryButton);
+          directoryLi.appendChild(directoryA);
+        }
+
+        if (assignment.live) {
+          const liveButton = document.createElement('button');
+          liveButton.innerHTML = 'live';
+          const liveA = document.createElement('a');
+          liveA.target = '_blank';
+          liveA.href = liveURL + '/' + directory;
+          liveA.appendChild(liveButton);
+          directoryLi.appendChild(liveA);
+        }
+
         return directoryLi;
       })
       .reduce((ul, li) => {

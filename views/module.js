@@ -9,6 +9,8 @@ export default async (state, module) => {
     history.pushState({}, null, window.location.pathname + '?module=' + module.name);
   } catch (err) { };
 
+  // todo: only load module assignments when page is visited
+
   const container = document.createElement('div');
 
   const renderedModuleThumb = moduleThumb(state, module)

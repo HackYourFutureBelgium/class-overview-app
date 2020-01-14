@@ -17,15 +17,15 @@ export default (state, assignment, student) => {
     : 'https://github.com/' + student.userName + '/' + (assignment.repo || assignment.name);
   const repoURL = preRepoURL.replace('<user-name>', student.userName).replace('<class-name>', state.repoName);
 
-
-  const repoButton = document.createElement('button');
-  repoButton.innerHTML = 'review source';
-  const repoA = document.createElement('a');
-  repoA.target = '_blank';
-  repoA.href = repoURL;
-  repoA.appendChild(repoButton);
-  container.appendChild(repoA);
-
+  if (assignment.source !== false) {
+    const repoButton = document.createElement('button');
+    repoButton.innerHTML = 'review source';
+    const repoA = document.createElement('a');
+    repoA.target = '_blank';
+    repoA.href = repoURL;
+    repoA.appendChild(repoButton);
+    container.appendChild(repoA);
+  }
 
   const preLiveURL = typeof assignment.live === 'string'
     ? assignment.live

@@ -8,7 +8,7 @@ export default async (state, student) => {
 
   const studentImg = document.createElement('img');
   studentImg.alt = student.name + ' - ' + student.userName;
-  studentImg.style = 'height:130px;width:130px;padding-top:3%;';
+  studentImg.style = 'height:130px;width:130px;';
   try {
     const userObjPromise = await fetch('https://api.github.com/users/' + student.userName);
     const userData = await userObjPromise.json();
@@ -20,7 +20,7 @@ export default async (state, student) => {
 
   const nameComponent = document.createElement('h2');
   nameComponent.innerHTML = student.name;
-  nameComponent.style = 'margin-top:0%;'
+  nameComponent.style = 'margin-top:0%';
 
 
   const githubButton = document.createElement('button');
@@ -71,7 +71,7 @@ export default async (state, student) => {
 
   const container = document.createElement('div');
   container.id = student.name;
-  container.style = 'display:flex;flex-direction:row;margin-bottom:2%;margin-right:5%;'
+  container.style = 'display:flex;flex-direction:row;align-items:center;padding-right:3%;'
 
   container.appendChild(studentImg);
   container.appendChild(studentInfo);

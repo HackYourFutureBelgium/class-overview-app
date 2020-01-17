@@ -9,11 +9,11 @@ export default async (state, student) => {
 
   const renderedStudentThumb = await studentThumb(state, student);
   container.appendChild(renderedStudentThumb);
+  container.appendChild(document.createElement('hr'));
 
   for (const module of state.modules) {
     const renderedModuleThumb = moduleThumb(state, module);
-    const renderedStudentAssignments = assignments(module, student)
-
+    const renderedStudentAssignments = await assignments(module, student);
 
 
     container.appendChild(document.createElement('hr'));
@@ -29,6 +29,7 @@ export default async (state, student) => {
       container.innerHTML = '';
       container.appendChild(renderedStudentThumb);
       container.appendChild(document.createElement('hr'));
+      container.appendChild(document.createElement('hr'));
       container.appendChild(renderedModuleThumb);
       container.appendChild(renderedStudentAssignments);
 
@@ -38,6 +39,7 @@ export default async (state, student) => {
     container.appendChild(renderedModuleThumb);
     container.appendChild(renderedStudentAssignments);
     container.appendChild(document.createElement('br'));
+    container.appendChild(document.createElement('hr'));
   }
 
   return container;

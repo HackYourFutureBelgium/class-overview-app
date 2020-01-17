@@ -1,59 +1,24 @@
-import assignment from './assignment.js'
+import assignmentsLazy from './assignments-lazy.js'
 
-export default (module, student) => {
+export default async (module, student) => {
 
-  const assignmentsUl = document.createElement('ul');
+  if (student.views[module.name]) return student.views[module.name];
 
-  if (module.projects && module.projects.length > 0) {
-    const projLi = document.createElement('li');
+  const container = document.createElement('details');
 
-    const header = document.createElement('h3');
-    header.innerHTML = "Projects";
-    projLi.appendChild(header);
+  const summary = document.createElement('summary');
+  summary.innerHTML = 'Click to expand ' + student.name + "'s assignments";
+  container.appendChild(summary);
 
-    const projUl = document.createElement('ul');
-    for (const project of module.projects) {
-      projUl.appendChild(assignment(state, project, student));
+  let loaded = false;
+  container.onclick = async () => {
+    if (!loaded) {
+      container.appendChild(await assignmentsLazy(module, student));
+      loaded = true;
     }
-    projLi.appendChild(projUl);
-
-    assignmentsUl.appendChild(projLi);
   }
 
-  if (module.exercises && module.exercises.length > 0) {
-    const exLi = document.createElement('li');
-
-    const header = document.createElement('h3');
-    header.innerHTML = "Exercises";
-    exLi.appendChild(header);
-
-    const exUl = document.createElement('ul');
-    for (const exercise of module.exercises) {
-      exUl.appendChild(assignment(state, exercise, student));
-    }
-    exLi.appendChild(exUl);
-
-    assignmentsUl.appendChild(exLi);
-  }
-
-  if (module.assessments && module.assessments.length > 0) {
-    const assLi = document.createElement('li');
-
-    const header = document.createElement('h3');
-    header.innerHTML = "Assessments";
-    assLi.appendChild(header);
-
-    const assUl = document.createElement('ul');
-    for (const assessment of module.assessments) {
-      assUl.appendChild(assignment(state, assessment, student));
-    }
-    assLi.appendChild(assUl);
-
-    assignmentsUl.appendChild(assLi);
-  }
-
-  const container = document.createElement('div');
-  container.appendChild(assignmentsUl);
+  student.views[module.name] = container;
 
   return container;
 

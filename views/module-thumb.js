@@ -1,9 +1,8 @@
 import renderModule from './module.js'
-const cache = new Map();
 
 export default (state, module) => {
 
-  if (cache.has(module)) return cache.get(module);
+  if (module.views && module.views.thumb) return module.views.thumb;
 
   const title = document.createElement('h1');
   title.innerHTML = module.name;
@@ -33,16 +32,25 @@ export default (state, module) => {
   repoA.appendChild(repoButton);
 
 
+  const sharedNotesButton = document.createElement('button');
+  sharedNotesButton.innerHTML = 'Shared notes';
+
+  const sharedNotesA = document.createElement('a');
+  sharedNotesA.target = '_blank';
+  sharedNotesA.href = `https://github.com/${state.userName}/${state.repoName}/tree/master/shared-notes/${module.number}-${module.name}.md`;
+  sharedNotesA.appendChild(sharedNotesButton);
+
+
   const studentsButton = document.createElement('button');
   studentsButton.innerHTML = 'All student assignments';
   studentsButton.onclick = async () => {
     const moduleEl = await renderModule(state, module);
-    state.root.innerHTML = '';
-    state.root.appendChild(moduleEl);
+    state.body.innerHTML = '';
+    state.body.appendChild(moduleEl);
   }
 
 
-  const moduleInfo = [status, boardA, repoA, studentsButton]
+  const moduleInfo = [status, studentsButton, boardA, repoA, sharedNotesA]
     .map(item => {
       const li = document.createElement('li');
       li.appendChild(item);
@@ -59,7 +67,10 @@ export default (state, module) => {
   container.appendChild(title);
   container.appendChild(moduleInfo);
 
-  cache.set(module, container);
+  if (!module.views) {
+    module.views = {};
+  }
+  module.views.thumb = container;
 
   return container;
 

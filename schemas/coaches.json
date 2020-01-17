@@ -1,0 +1,8 @@
+{
+  "description": "an array of all coach objects for a given class",
+  "type": "array",
+  "items": {
+    "type": "$ref/coach.json",
+    "description": "the coaches for this class"
+  }
+}

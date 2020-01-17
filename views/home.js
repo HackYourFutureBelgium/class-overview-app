@@ -9,9 +9,9 @@ export default async state => {
   } catch (err) { };
 
   const container = document.createElement('div');
-  container.id = state.repoName;
 
   container.appendChild(await displayMany(state, state.modules, moduleThumb, 'Modules'));
+  container.appendChild(document.createElement('hr'));
   container.appendChild(document.createElement('hr'));
   container.appendChild(await displayMany(state, state.students, studentThumb, 'Students'));
 

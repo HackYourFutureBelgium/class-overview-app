@@ -1,5 +1,5 @@
 {
-  "description": "the exercises/projects/assessments, status, and project board number for each module",
+  "description": "the exercises/projects/assessments, status, and project board number for each module.  If either 'exercises', 'projects' or 'assignments' is present at app init, it will assume you are working on frozen assignments and won't fetch from the repo (so you past class' overview apps don't change as the curriculum does)",
   "type": "object",
   "properties": {
     "name": {

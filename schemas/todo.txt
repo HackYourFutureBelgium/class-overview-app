@@ -1,0 +1,1 @@
+document the dynamic .view properties on student & module

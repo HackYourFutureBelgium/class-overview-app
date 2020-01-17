@@ -1,15 +1,14 @@
 import renderStudent from './student.js'
-const cache = new Map();
 
 export default async (state, student) => {
 
-  if (cache.has(student)) {
-    return cache.get(student);
+  if (student.views.thumb) {
+    return student.views.thumb;
   }
 
   const studentImg = document.createElement('img');
   studentImg.alt = student.name + ' - ' + student.userName;
-  studentImg.style = 'height:130px;width:130px;';
+  studentImg.style = 'height:130px;width:130px;padding-top:3%;';
   try {
     const userObjPromise = await fetch('https://api.github.com/users/' + student.userName);
     const userData = await userObjPromise.json();
@@ -21,6 +20,7 @@ export default async (state, student) => {
 
   const nameComponent = document.createElement('h2');
   nameComponent.innerHTML = student.name;
+  nameComponent.style = 'margin-top:0%;'
 
 
   const githubButton = document.createElement('button');
@@ -41,15 +41,23 @@ export default async (state, student) => {
   personalPageLink.appendChild(personalPageButton);
 
 
+  const bioButton = document.createElement('button');
+  bioButton.innerHTML = 'Student bio';
+
+  const bioLink = document.createElement('a');
+  bioLink.href = `https://github.com/${state.userName}/${state.repoName}/tree/master/student-bios/${student.userName}.md`;
+  bioLink.target = '_blank';
+  bioLink.appendChild(bioButton);
+
   const allAssignments = document.createElement('button');
   allAssignments.innerHTML = 'Review all assignments';
   allAssignments.onclick = async () => {
     const studentEl = await renderStudent(state, student);
-    state.root.innerHTML = '';
-    state.root.appendChild(studentEl);
+    state.body.innerHTML = '';
+    state.body.appendChild(studentEl);
   }
 
-  const studentInfo = [nameComponent, githubLink, personalPageLink, allAssignments]
+  const studentInfo = [nameComponent, allAssignments, githubLink, personalPageLink, bioLink]
     .map(item => {
       const li = document.createElement('li');
       li.appendChild(item);
@@ -63,12 +71,12 @@ export default async (state, student) => {
 
   const container = document.createElement('div');
   container.id = student.name;
-  container.style = 'display:flex;flex-direction:row;padding-bottom:5%;padding-right:5%'
+  container.style = 'display:flex;flex-direction:row;margin-bottom:2%;margin-right:5%;'
 
   container.appendChild(studentImg);
   container.appendChild(studentInfo);
 
-  cache.set(student, container);
+  student.views.thumb = container;
   return container;
 
 }

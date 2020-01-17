@@ -60,6 +60,7 @@ export default (state, assignment, student) => {
 
   // assume all endpoints exist if the repo exists
   if (Array.isArray(assignment.endpoints) && assignment.endpoints.length > 0) {
+    // eventually be able to configure endpoints with more detail 
     const endpointsUl = assignment.endpoints
       .map(directory => {
         const directoryButton = document.createElement('button');

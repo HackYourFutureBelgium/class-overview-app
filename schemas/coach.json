@@ -1,0 +1,22 @@
+{
+  "description": "enough info to do a public & static progress dashboard.  no sensitive or private data.  used to generate links and fetch their profile picture",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "their full name"
+    },
+    "userName": {
+      "type": "string",
+      "description": "their github handle. for creating a link to their account and their coach bio"
+    },
+    "modules": {
+      "type": "array",
+      "items": [
+        "string",
+        "number"
+      ],
+      "description": "either the number or name of the module they taught.  this will be used to render them into the correct pages. this is an array because often coaches will teach multiple times for one class"
+    }
+  }
+}

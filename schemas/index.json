@@ -18,12 +18,16 @@
       "type": "string",
       "description": "the name property of student module currently rendered, if empty all students will be rendered.  This is set by user actions or url queries at load"
     },
-    "root": {
+    "container": {
       "type": [
         "Element",
         "string"
       ],
-      "description": "the root for this app. if string, will find by id. if Element, will operate directly"
+      "description": "the container for this app. if string, will find by id. if Element, will operate directly"
+    },
+    "body": {
+      "type": "Element",
+      "description": "the container for the body of this app. this is created and managed by the app"
     },
     "students": {
       "type": "$ref/students.json"

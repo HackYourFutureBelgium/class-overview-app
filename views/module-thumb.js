@@ -10,7 +10,7 @@ export default (state, module) => {
 
   const status = document.createElement('text');
   status.style.fontWeight = 'bold';
-  status.innerHTML = module.status;
+  status.innerHTML = (module.weeks ? module.weeks + ' weeks - ' : '') + module.status;
 
 
   const boardButton = document.createElement('button');

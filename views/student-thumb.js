@@ -9,13 +9,10 @@ export default async (state, student) => {
   const studentImg = document.createElement('img');
   studentImg.alt = student.name + ' - ' + student.userName;
   studentImg.style = 'height:130px;width:130px;';
-  try {
-    const userObjPromise = await fetch('https://api.github.com/users/' + student.userName);
-    const userData = await userObjPromise.json();
-    studentImg.src = userData.avatar_url;
-  } catch (err) {
-    console.log('--------', err);
-  };
+  fetch('https://api.github.com/users/' + student.userName)
+    .then(res => res.json())
+    .then(userData => studentImg.src = userData.avatar_url)
+    .catch(err => console.log(err));
 
 
   const nameComponent = document.createElement('h2');

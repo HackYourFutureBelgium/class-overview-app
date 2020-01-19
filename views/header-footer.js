@@ -40,8 +40,16 @@ export default (state) => {
   issuesButton.innerHTML = 'to Class Issues'
   issuesA.appendChild(issuesButton);
   header.appendChild(issuesA);
-  container.appendChild(header);
 
+  const homeworkSubmissionA = document.createElement('a');
+  homeworkSubmissionA.href = "https://github.com/hackyourfuturebelgium/homework-submission";
+  homeworkSubmissionA.target = "_blank";
+  const homeworkSubmissionButton = document.createElement('button');
+  homeworkSubmissionButton.innerHTML = 'Homework Submission'
+  homeworkSubmissionA.appendChild(homeworkSubmissionButton);
+  header.appendChild(homeworkSubmissionA);
+
+  container.appendChild(header);
 
   // container.appendChild(document.createElement('br'));
   container.appendChild(document.createElement('hr'));
@@ -61,6 +69,7 @@ export default (state) => {
 
   footer.appendChild(repoA.cloneNode(true));
   footer.appendChild(issuesA.cloneNode(true));
+  footer.appendChild(homeworkSubmissionA.cloneNode(true));
   container.appendChild(footer);
 
   return container;

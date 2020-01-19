@@ -6,7 +6,8 @@ export default (state, coach) => {
 
   const nameComponent = document.createElement('code');
   nameComponent.innerHTML = coach.name + ' : ';
-  nameComponent.style = 'font-size: 1.5em';
+  // nameComponent.style = 'font-size: 1.5em';
+  nameComponent.className = 'coach-thumb-name';
 
   const githubButton = document.createElement('button');
   githubButton.innerHTML = 'github.com/' + coach.userName;
@@ -36,8 +37,8 @@ export default (state, coach) => {
   //   }, document.createElement('ul'));
 
   const container = document.createElement('div');
+  container.className = 'coach-thumb';
   container.id = coach.name;
-  // container.style = 'display:flex;flex-direction:row;padding-bottom:5%;padding-right:5%'
 
   container.appendChild(nameComponent);
   container.appendChild(bioLink);

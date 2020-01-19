@@ -6,6 +6,7 @@ export default async (state, student) => {
   history.pushState({}, null, window.location.pathname + '?student=' + student.userName);
 
   const container = document.createElement('div')
+  container.className = 'students';
 
   const renderedStudentThumb = await studentThumb(state, student);
   container.appendChild(renderedStudentThumb);

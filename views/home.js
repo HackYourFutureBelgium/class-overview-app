@@ -9,6 +9,7 @@ export default async state => {
   } catch (err) { };
 
   const container = document.createElement('div');
+  container.className = 'home';
 
   container.appendChild(await displayMany(state, state.modules, moduleThumb, 'Modules'));
   container.appendChild(document.createElement('hr'));

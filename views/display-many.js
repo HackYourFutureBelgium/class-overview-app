@@ -11,7 +11,8 @@ export default async (state, arr, render, title) => {
       return div;
     }, document.createElement('div'))
 
-  arrContainer.style = 'display:flex;flex-direction:row;flex-wrap:wrap;';
+  // arrContainer.style = 'display:flex;flex-direction:row;flex-wrap:wrap;';
+  arrContainer.className = 'display-many-items';
   if (typeof title === 'string') arrContainer.id = title;
 
   const container = document.createElement('div');
@@ -24,6 +25,7 @@ export default async (state, arr, render, title) => {
   }
 
   container.appendChild(arrContainer);
+  container.className = 'display-many';
 
   return container;
 

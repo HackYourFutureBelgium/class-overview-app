@@ -8,7 +8,8 @@ export default async (state, student) => {
 
   const studentImg = document.createElement('img');
   studentImg.alt = student.name + ' - ' + student.userName;
-  studentImg.style = 'height:130px;width:130px;';
+  // studentImg.style = 'height:130px;width:130px;';
+  studentImg.className = 'student-thumb-img';
   fetch('https://api.github.com/users/' + student.userName)
     .then(res => res.json())
     .then(userData => studentImg.src = userData.avatar_url)
@@ -17,7 +18,8 @@ export default async (state, student) => {
 
   const nameComponent = document.createElement('h2');
   nameComponent.innerHTML = student.name;
-  nameComponent.style = 'margin-top:0%';
+  // nameComponent.style = 'margin-top:0%';
+  nameComponent.className = 'student-thumb-name';
 
 
   const githubButton = document.createElement('button');
@@ -68,7 +70,8 @@ export default async (state, student) => {
 
   const container = document.createElement('div');
   container.id = student.name;
-  container.style = 'display:flex;flex-direction:row;align-items:center;padding-right:3%;'
+  // container.style = 'display:flex;flex-direction:row;align-items:center;padding-right:3%;'
+  container.className = 'student-thumb';
 
   container.appendChild(studentImg);
   container.appendChild(studentInfo);

@@ -9,7 +9,8 @@ export default (state, module) => {
 
 
   const status = document.createElement('text');
-  status.style.fontWeight = 'bold';
+  // status.style.fontWeight = 'bold';
+  status.className = 'module-thumb-status';
   status.innerHTML = (module.weeks ? module.weeks + ' weeks - ' : '') + module.status;
 
 
@@ -63,7 +64,8 @@ export default (state, module) => {
 
   const container = document.createElement('div');
   container.id = module.name;
-  container.style = 'padding-right:5%;padding-left:5%;margin-bottom:3%;';
+  // container.style = 'padding-right:5%;padding-left:5%;margin-bottom:3%;';
+  container.className = 'module-thumb';
   container.appendChild(title);
   container.appendChild(moduleInfo);
 

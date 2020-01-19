@@ -21,7 +21,8 @@ export default async (module, student) => {
       console.log(err);
       const errEl = document.createElement('p');
       errEl.innerHTML = err + ': ' + err.message;
-      errEl.style.color = 'red';
+      // errEl.style.color = 'red';
+      errEl.className = 'assignments-load-error';
       student.views[module.name] = errEl;
       module.views.thumb.appendChild(errEl.cloneNode());
       return errEl;
@@ -79,6 +80,7 @@ export default async (module, student) => {
   }
 
   const container = document.createElement('div');
+  container.className = 'assignments-lazy';
   container.appendChild(assignmentsUl);
 
   return container;

@@ -1,0 +1,77 @@
+/* a single list item under "Projects" and "Exercises" */
+.assignment {
+  padding-bottom: 1%;
+}
+.assignment-title {
+  display: inline;
+}
+
+/* the details/summary that contains all assignments */
+.assignments {}
+
+/* the lists containing the assignment list items */
+.assignments-lazy {}
+.assignments-lazy-load-error {
+  color: red;
+}
+
+/* list item with coach name, bio link & github link */
+.coach-thumb {}
+.coach-thumb-name {
+  font-size:1.53em;
+}
+
+/* the list of coaches in each module's page */
+.coaches {
+  padding-right: 5%;
+  padding-left: 5%;
+  margin-bottom: 3%;
+}
+
+/* the two main sections on the home page, "Title" and flexboxed thumbnails */
+.display-many {}
+.display-many-items {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+/* the title & nav-buttons at the top and bottom.  everything you see before the page loads */
+.header-footer {}
+.header-footer-title {}
+.header-footer-header {}
+.header-footer-footer {}
+
+/* renders many modules, divider, many students between header & footer */
+.home { }
+
+/* the little thing with module name & a list under it */
+.module-thumb {
+  padding-right: 5%;
+  padding-left: 5%;
+  margin-bottom: 3%;
+}
+.module-thumb-status {
+  font-weight: bold;
+}
+
+/* the container for module pages.  a module thumb with student-thumbs and assignments */
+.module { }
+
+/* the little thing with student image, name & a list next to it */
+.student-thumb {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-right: 3%;
+}
+.student-thumb-img {
+  height: 130px;
+  width: 130px;
+}
+.student-thumb-name {
+  margin-top:0%;
+}
+
+/* the container for student pages.  a student thumb with module-thumbs and assignments */
+.students { }

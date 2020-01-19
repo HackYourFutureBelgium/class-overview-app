@@ -3,13 +3,17 @@ import home from "./home.js";
 export default (state) => {
 
   const container = document.createElement('div');
+  container.className = 'header-footer';
 
-  const header = document.createElement('h1');
-  header.innerHTML = state.repoName
-  container.appendChild(header);
+  const title = document.createElement('h1');
+  title.innerHTML = state.repoName
+  title.className = 'header-footer-title';
+  container.appendChild(title);
 
   container.appendChild(document.createElement('hr'));
 
+  const header = document.createElement('div');
+  header.className = 'header-footer-header';
   const overviewButton = document.createElement('button');
   overviewButton.innerHTML = 'Back to Overview';
   const toHome = async () => {
@@ -19,7 +23,7 @@ export default (state) => {
     state.body.appendChild(await home(state));
   }
   overviewButton.onclick = toHome;
-  container.appendChild(overviewButton);
+  header.appendChild(overviewButton);
 
   const repoA = document.createElement('a');
   repoA.href = "https://github.com/" + state.userName + "/" + state.repoName;
@@ -27,7 +31,7 @@ export default (state) => {
   const repoButton = document.createElement('button');
   repoButton.innerHTML = 'to Class Repository'
   repoA.appendChild(repoButton);
-  container.appendChild(repoA);
+  header.appendChild(repoA);
 
   const issuesA = document.createElement('a');
   issuesA.href = "https://github.com/" + state.userName + "/" + state.repoName + '/issues';
@@ -35,7 +39,8 @@ export default (state) => {
   const issuesButton = document.createElement('button');
   issuesButton.innerHTML = 'to Class Issues'
   issuesA.appendChild(issuesButton);
-  container.appendChild(issuesA);
+  header.appendChild(issuesA);
+  container.appendChild(header);
 
 
   // container.appendChild(document.createElement('br'));
@@ -47,13 +52,16 @@ export default (state) => {
   container.appendChild(document.createElement('hr'));
   container.appendChild(document.createElement('hr'));
 
+  const footer = document.createElement('div');
+  footer.className = 'header-footer-footer';
+
   const bottomOverviewButton = overviewButton.cloneNode(true);
   bottomOverviewButton.onclick = toHome;
-  container.appendChild(bottomOverviewButton);
+  footer.appendChild(bottomOverviewButton);
 
-  container.appendChild(repoA.cloneNode(true));
-  container.appendChild(issuesA.cloneNode(true));
-
+  footer.appendChild(repoA.cloneNode(true));
+  footer.appendChild(issuesA.cloneNode(true));
+  container.appendChild(footer);
 
   return container;
 

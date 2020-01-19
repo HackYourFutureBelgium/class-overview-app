@@ -10,6 +10,7 @@ export default async (state, module) => {
   } catch (err) { };
 
   const container = document.createElement('div');
+  container.className = 'module';
 
   const renderedModuleThumb = moduleThumb(state, module)
   container.appendChild(renderedModuleThumb);

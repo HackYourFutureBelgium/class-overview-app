@@ -4,10 +4,12 @@
 export default (state, assignment, student) => {
 
   const container = document.createElement('li');
-  container.style = 'padding-bottom:1%';
+  // container.style = 'padding-bottom:1%';
+  container.className = 'assignment';
 
   const title = document.createElement('h3');
-  title.style.display = 'inline';
+  // title.style.display = 'inline';
+  title.className = 'assignment-title';
   const titleText = document.createTextNode(assignment.name + ': ');
   title.appendChild(titleText);
   container.appendChild(title);
@@ -60,7 +62,7 @@ export default (state, assignment, student) => {
 
   // assume all endpoints exist if the repo exists
   if (Array.isArray(assignment.endpoints) && assignment.endpoints.length > 0) {
-    // eventually be able to configure endpoints with more detail 
+    // eventually be able to configure endpoints with more detail
     const endpointsUl = assignment.endpoints
       .map(directory => {
         const directoryButton = document.createElement('button');

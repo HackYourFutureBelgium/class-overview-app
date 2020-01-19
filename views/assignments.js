@@ -5,6 +5,7 @@ export default async (module, student) => {
   if (student.views[module.name]) return student.views[module.name];
 
   const container = document.createElement('details');
+  container.className = 'assignments';
 
   const summary = document.createElement('summary');
   summary.innerHTML = 'Click to expand ' + student.name + "'s assignments";

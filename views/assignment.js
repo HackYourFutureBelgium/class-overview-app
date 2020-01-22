@@ -6,6 +6,7 @@ export default (state, assignment, student) => {
   const container = document.createElement('li');
   // container.style = 'padding-bottom:1%';
   container.className = 'assignment';
+  container.id = assignment.name;
 
   const title = document.createElement('h3');
   // title.style.display = 'inline';
@@ -66,7 +67,7 @@ export default (state, assignment, student) => {
     const endpointsUl = assignment.endpoints
       .map(directory => {
         const directoryButton = document.createElement('button');
-        directoryButton.innerHTML = 'review directory';
+        directoryButton.innerHTML = 'source';
 
 
         const directoryLi = document.createElement('li');
@@ -97,6 +98,7 @@ export default (state, assignment, student) => {
         return ul;
       }, document.createElement('ul'));
 
+    endpointsUl.id = 'endpoints-' + assignment.name;
     container.appendChild(endpointsUl);
   }
 
@@ -132,6 +134,35 @@ export default (state, assignment, student) => {
       // container.appendChild(reportLi);
       ul.appendChild(reportLi)
     };
+    ul.id = 'reports-' + assignment.name;
+    container.appendChild(ul);
+  }
+
+
+  if (Array.isArray(assignment.branches)) {
+    const branchButton = branchName => {
+      const branchURL = repoURL + '/tree/' + branchName;
+      const button = document.createElement('button');
+      button.innerHTML = branchName;
+      button.onclick = () => window.open(branchURL, '_blank');
+      return button;
+    }
+    const branchButtonsUl = assignment.branches
+      .map(branchName => branchButton(branchName))
+      .reduce((ul, button) => {
+        const li = document.createElement('li');
+        li.appendChild(button);
+        ul.appendChild(li);
+        return ul;
+      }, document.createElement('ul'));
+    const branchesLi = document.createElement('li');
+    branchesLi.appendChild(document.createTextNode('required branches: '));
+    branchesLi.appendChild(branchButton('master (default)'));
+    branchesLi.appendChild(branchButtonsUl);
+
+    const ul = document.createElement('ul');
+    ul.appendChild(branchesLi);
+    ul.id = 'branches-' + assignment.name;
     container.appendChild(ul);
   }
 

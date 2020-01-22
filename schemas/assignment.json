@@ -28,6 +28,14 @@
         "description": "relative paths to the directory/file expected"
       }
     },
+    "branches": {
+      "type": "array",
+      "description": "(master is implied, and always used for main links). any assigned branches. can be used for tutorials, features, development workflows, ... any reason you might assign branches. Does not assume branches will have the same directory structure as main project on master.  eventually might be worth assigning endpoints on branches, but reports won't be possible",
+      "items": {
+        "type": "string",
+        "description": "used to render links to this branch"
+      }
+    },
     "reports": {
       "type": "array",
       "description": "a list of any and all report files a student is expected to build and push for this assignment.  reports will be pulled from github pages as an API and logged to the console directly in the live app",

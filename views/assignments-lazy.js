@@ -43,6 +43,7 @@ export default async (module, student) => {
       projUl.appendChild(assignment(state, project, student));
     }
     projLi.appendChild(projUl);
+    projLi.id = 'Projects-' + module.name;
 
     assignmentsUl.appendChild(projLi);
   }
@@ -59,6 +60,7 @@ export default async (module, student) => {
       exUl.appendChild(assignment(state, exercise, student));
     }
     exLi.appendChild(exUl);
+    exLi.id = 'Exercises-' + module.name;
 
     assignmentsUl.appendChild(exLi);
   }
@@ -75,12 +77,14 @@ export default async (module, student) => {
       assUl.appendChild(assignment(state, assessment, student));
     }
     assLi.appendChild(assUl);
+    assLi.id = 'Assessments-' + module.name;
 
     assignmentsUl.appendChild(assLi);
   }
 
   const container = document.createElement('div');
   container.className = 'assignments-lazy';
+  assignmentsUl.id = 'assignments-' + module.name;
   container.appendChild(assignmentsUl);
 
   return container;

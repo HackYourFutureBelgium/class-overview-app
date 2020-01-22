@@ -11,6 +11,7 @@ export default async (state, module) => {
 
   const container = document.createElement('div');
   container.className = 'module';
+  container.id = module.name;
 
   const renderedModuleThumb = moduleThumb(state, module)
   container.appendChild(renderedModuleThumb);

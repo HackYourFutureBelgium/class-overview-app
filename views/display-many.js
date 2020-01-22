@@ -16,7 +16,7 @@ export default async (state, arr, render, title) => {
   if (typeof title === 'string') arrContainer.id = title;
 
   const container = document.createElement('div');
-  container.id = 'all arr';
+  container.id = title;
 
   if (typeof title === 'string') {
     const header = document.createElement('h1');

@@ -4,6 +4,7 @@ export default (state) => {
 
   const container = document.createElement('div');
   container.className = 'header-footer';
+  container.id = 'class-app';
 
   const title = document.createElement('h1');
   title.innerHTML = state.repoName

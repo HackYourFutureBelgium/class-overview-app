@@ -19,6 +19,7 @@ export default async (state, container) => {
 
 
   state.body = document.createElement('div');
+  state.body.id = 'body';
   state.body.style = 'padding-top: 3%; padding-bottom: 3%;';
 
   state.container.appendChild(headerFooter(state));

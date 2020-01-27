@@ -157,7 +157,7 @@ export default (state, assignment, student) => {
       }, document.createElement('ul'));
     const branchesLi = document.createElement('li');
     branchesLi.appendChild(document.createTextNode('required branches: '));
-    branchesLi.appendChild(branchButton('master (default)'));
+    branchesLi.appendChild(branchButton('master'));
     branchesLi.appendChild(branchButtonsUl);
 
     const ul = document.createElement('ul');

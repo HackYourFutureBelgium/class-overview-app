@@ -14,6 +14,11 @@
           "aside-info",
           "interesting-links"
         ]
+      },
+      {
+        "name": "week-1 lesson plan exercises",
+        "live": "https://hackyourfuture.be/separation-of-concerns/week-1",
+        "source": false
       }
     ]
   },

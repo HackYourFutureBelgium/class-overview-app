@@ -16,7 +16,7 @@ export default (state) => {
   const header = document.createElement('div');
   header.className = 'header-footer-header';
   const overviewButton = document.createElement('button');
-  overviewButton.innerHTML = 'Back to Overview';
+  overviewButton.innerHTML = 'Class Home';
   const toHome = async () => {
     state.currentModule = null;
     state.currentStudent = null;
@@ -30,7 +30,7 @@ export default (state) => {
   repoA.href = "https://github.com/" + state.userName + "/" + state.repoName;
   repoA.target = "_blank";
   const repoButton = document.createElement('button');
-  repoButton.innerHTML = 'to Class Repository'
+  repoButton.innerHTML = 'Class Repository'
   repoA.appendChild(repoButton);
   header.appendChild(repoA);
 
@@ -38,7 +38,7 @@ export default (state) => {
   issuesA.href = "https://github.com/" + state.userName + "/" + state.repoName + '/issues';
   issuesA.target = "_blank";
   const issuesButton = document.createElement('button');
-  issuesButton.innerHTML = 'to Class Issues'
+  issuesButton.innerHTML = 'Class Issues'
   issuesA.appendChild(issuesButton);
   header.appendChild(issuesA);
 
@@ -49,6 +49,14 @@ export default (state) => {
   homeworkSubmissionButton.innerHTML = 'Homework Submission'
   homeworkSubmissionA.appendChild(homeworkSubmissionButton);
   header.appendChild(homeworkSubmissionA);
+
+  const studyResourcesA = document.createElement('a');
+  studyResourcesA.href = "https://study.hackyourfuture.be";
+  studyResourcesA.target = "_blank";
+  const studyResourcesButton = document.createElement('button');
+  studyResourcesButton.innerHTML = 'Study Links';
+  studyResourcesA.appendChild(studyResourcesButton);
+  header.appendChild(studyResourcesA);
 
   container.appendChild(header);
 
@@ -71,6 +79,7 @@ export default (state) => {
   footer.appendChild(repoA.cloneNode(true));
   footer.appendChild(issuesA.cloneNode(true));
   footer.appendChild(homeworkSubmissionA.cloneNode(true));
+  footer.appendChild(studyResourcesA.cloneNode(true));
   container.appendChild(footer);
 
   return container;

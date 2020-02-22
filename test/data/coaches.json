@@ -3,8 +3,8 @@
     "name": "Octo Cat",
     "userName": "octocat",
     "modules": [
-      2,
-      4,
+      "state",
+      "encapsulation",
       "working-with-code"
     ]
   },
@@ -13,7 +13,8 @@
     "userName": "HackYourFutureBelgium",
     "modules": [
       "incremental-development",
-      0
+      "web-apps",
+      "working-with-code"
     ]
   }
 ]

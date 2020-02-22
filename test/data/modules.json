@@ -133,19 +133,5 @@
     "status": "to do",
     "board": 4,
     "weeks": 3
-  },
-  {
-    "number": 4,
-    "name": "encapsulation",
-    "status": "to do",
-    "board": 5,
-    "weeks": 3
-  },
-  {
-    "number": 5,
-    "name": "public-apis",
-    "status": "to do",
-    "board": 6,
-    "weeks": 3
   }
 ]

@@ -9,15 +9,15 @@ export default (state, coaches) => {
   coachesHead.innerHTML = "Coaches";
   coachContainer.appendChild(coachesHead);
 
-  const coachesList = coaches
+  const coachThumbs = coaches
     .map(coach => coachThumb(state, coach))
-    .reduce((ul, thumb) => {
-      const li = document.createElement('li');
-      li.appendChild(thumb);
-      ul.appendChild(li);
-      return ul;
-    }, document.createElement('ul'));
+    .reduce((div, thumb) => {
+      div.appendChild(thumb);
+      return div;
+    }, document.createElement('div'));
+  coachThumbs.className = 'coach-thumbs';
 
-  coachContainer.appendChild(coachesList);
+  coachContainer.appendChild(coachThumbs);
+
   return coachContainer;
 }

@@ -1,4 +1,5 @@
 import home from "./home.js";
+import randomizer from "./randomizer.js"
 
 export default (state) => {
 
@@ -41,6 +42,7 @@ export default (state) => {
   issuesButton.innerHTML = 'Class Issues'
   issuesA.appendChild(issuesButton);
   header.appendChild(issuesA);
+  header.appendChild(document.createElement('br'));
 
   const homeworkSubmissionA = document.createElement('a');
   homeworkSubmissionA.href = "https://github.com/hackyourfuturebelgium/homework-submission";
@@ -57,6 +59,17 @@ export default (state) => {
   studyResourcesButton.innerHTML = 'Study Links';
   studyResourcesA.appendChild(studyResourcesButton);
   header.appendChild(studyResourcesA);
+
+
+  const randomizerButton = document.createElement('button');
+  randomizerButton.innerHTML = 'class randomizer';
+  randomizerButton.onclick = async () => {
+    state.currentModule = null;
+    state.currentStudent = null;
+    state.body.innerHTML = '';
+    state.body.appendChild(await randomizer(state));
+  };
+  header.appendChild(randomizerButton);
 
   container.appendChild(header);
 
@@ -78,8 +91,10 @@ export default (state) => {
 
   footer.appendChild(repoA.cloneNode(true));
   footer.appendChild(issuesA.cloneNode(true));
+  footer.appendChild(document.createElement('br'));
   footer.appendChild(homeworkSubmissionA.cloneNode(true));
   footer.appendChild(studyResourcesA.cloneNode(true));
+  footer.appendChild(randomizerButton.cloneNode(true));
   container.appendChild(footer);
 
   return container;

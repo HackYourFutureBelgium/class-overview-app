@@ -2,7 +2,7 @@ import renderStudent from './student.js'
 
 export default async (state, student) => {
 
-  if (student.views.thumb) {
+  if (student.views && student.views.thumb) {
     return student.views.thumb;
   }
 
@@ -76,7 +76,12 @@ export default async (state, student) => {
   container.appendChild(studentImg);
   container.appendChild(studentInfo);
 
-  student.views.thumb = container;
+  if (!student.views) {
+    student.views = {};
+    student.views.thumb = container;
+  } else {
+    student.views.thumb = container;
+  }
   return container;
 
 }

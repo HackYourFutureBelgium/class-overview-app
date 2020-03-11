@@ -18,10 +18,6 @@
       "type": "number",
       "description": "indicates the number of this module's project board in the class repo. used to generate links to project boards"
     },
-    "weeks": {
-      "type": "number",
-      "description": "how long the module is"
-    },
     "projects": {
       "type": "array",
       "description": "all projects a student is expected to have for this module",

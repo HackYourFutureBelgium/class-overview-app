@@ -3,6 +3,7 @@ import moduleThumb from './views/module-thumb.js'
 import assignments from './views/assignments.js'
 import renderStudent from './views/student.js'
 import renderModule from './views/module.js'
+import randomizer from './views/randomizer.js'
 import home from "./views/home.js"
 import headerFooter from './views/header-footer.js'
 
@@ -35,6 +36,16 @@ export default async (state, container) => {
   state.students.forEach(student => student.views = {});
 
   const urlParams = new URL(window.location.href).searchParams;
+
+
+  const randomizerParam = urlParams.get("randomizer");
+  if (randomizerParam) {
+    state.currentModule = null;
+    state.currentStudent = null;
+    state.body.innerHTML = '';
+    state.body.appendChild(await randomizer(state));
+    return state;
+  }
 
   const studentParam = urlParams.get("student");
   state.currentStudent = state.students

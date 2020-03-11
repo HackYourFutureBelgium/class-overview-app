@@ -3,6 +3,8 @@ import renderStudentThumb from './student-thumb.js'
 // could permalink this by simply pushing student indices in group order as param
 export default (state) => {
 
+  history.pushState({}, null, window.location.pathname + '?randomizer=true');
+
   const container = document.createElement('div');
 
   const initializer = document.createElement('div');

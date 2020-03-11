@@ -11,7 +11,7 @@ export default (state, module) => {
   const status = document.createElement('text');
   // status.style.fontWeight = 'bold';
   status.className = 'module-thumb-status';
-  status.innerHTML = (module.weeks ? module.weeks + ' weeks - ' : '') + module.status;
+  status.innerHTML = module.status;
 
 
   const boardButton = document.createElement('button');

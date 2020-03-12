@@ -11,7 +11,7 @@ export default async (module, student) => {
   if (!module.populated) {
     module.populated = true;
 
-    const url = 'https://hackyourfuture.be/' + module.name + '/assignments.json'
+    const url = 'https://hackyourfuture.be/' + module.name + '/module-data/assignments.json'
     // const url = `https://${state.userName}.github.io/${module.name}/assignments.json`
     try {
       const res = await fetch(url)

@@ -1,0 +1,4 @@
+.DS_Store
+node_modules
+# push dist to use gh-pages for script hosting
+# dist

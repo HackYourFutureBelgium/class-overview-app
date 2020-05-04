@@ -56,7 +56,18 @@ export default async (state, student) => {
     state.body.appendChild(studentEl);
   }
 
-  const studentInfo = [nameComponent, allAssignments, githubLink, personalPageLink, bioLink]
+  const className = (() => {
+    if (typeof student.class === 'number') {
+      const classNumEl = document.createElement('text');
+      classNumEl.innerHTML = "Class " + student.class;
+      return classNumEl;
+    } else {
+      return null;
+    }
+  })()
+
+  const studentInfo = [nameComponent, className, allAssignments, githubLink, personalPageLink, bioLink]
+    .filter(item => item instanceof Element)
     .map(item => {
       const li = document.createElement('li');
       li.appendChild(item);

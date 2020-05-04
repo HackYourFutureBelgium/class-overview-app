@@ -39,7 +39,18 @@ export default (state, coach) => {
   bioLink.appendChild(bioButton);
 
 
-  const coachInfo = [nameComponent, githubLink, bioLink]
+  const className = (() => {
+    if (typeof coach.class === 'number') {
+      const classNumEl = document.createElement('text');
+      classNumEl.innerHTML = "Class " + coach.class;
+      return classNumEl;
+    } else {
+      return null;
+    }
+  })();
+
+  const coachInfo = [nameComponent, className, githubLink, bioLink]
+    .filter(item => item instanceof Element)
     .map(item => {
       const li = document.createElement('li');
       li.appendChild(item);

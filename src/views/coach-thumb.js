@@ -49,7 +49,18 @@ export default (state, coach) => {
     }
   })();
 
-  const coachInfo = [nameComponent, className, githubLink, bioLink]
+  const roleType = (() => {
+    if (typeof coach.role === 'string') {
+      const roleTypeEl = document.createElement('text');
+      roleTypeEl.innerHTML = coach.role;
+      return roleTypeEl;
+    } else {
+      return null;
+    }
+  })();
+  console.log(roleType, coach.role)
+
+  const coachInfo = [nameComponent, roleType, className, githubLink, bioLink]
     .filter(item => item instanceof Element)
     .map(item => {
       const li = document.createElement('li');

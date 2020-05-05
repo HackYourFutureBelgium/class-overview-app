@@ -5,7 +5,7 @@ export default (state, module) => {
   if (module.views && module.views.thumb) return module.views.thumb;
 
   const title = document.createElement('h1');
-  title.innerHTML = module.name;
+  title.innerHTML = module.name || module.repo;
 
 
   const status = document.createElement('text');

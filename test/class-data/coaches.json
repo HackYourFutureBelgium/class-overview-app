@@ -6,7 +6,8 @@
       "state",
       "encapsulation",
       "working-with-code"
-    ]
+    ],
+    "role": "lead"
   },
   {
     "name": "HYF Be",
@@ -15,6 +16,7 @@
       "incremental-development",
       "web-apps",
       "working-with-code"
-    ]
+    ],
+    "role": "homework"
   }
 ]

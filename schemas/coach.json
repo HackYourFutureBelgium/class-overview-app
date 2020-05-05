@@ -10,6 +10,10 @@
       "type": "string",
       "description": "their github handle. for creating a link to their account and their coach bio"
     },
+    "role": {
+      "type": "string",
+      "description": "lead, assistant, review, ... what kind of coach were they?"
+    },
     "modules": {
       "type": "array",
       "items": [

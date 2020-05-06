@@ -45,7 +45,7 @@ export default (state) => {
   header.appendChild(document.createElement('br'));
 
   const homeworkSubmissionA = document.createElement('a');
-  homeworkSubmissionA.href = "https://github.com/hackyourfuturebelgium/homework-submission";
+  homeworkSubmissionA.href = "https://home.hackyourfuture.be/students/homework-submission";
   homeworkSubmissionA.target = "_blank";
   const homeworkSubmissionButton = document.createElement('button');
   homeworkSubmissionButton.innerHTML = 'Homework Submission'

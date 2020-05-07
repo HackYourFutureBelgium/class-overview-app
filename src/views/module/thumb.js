@@ -43,7 +43,7 @@ export default (state, module) => {
 
   const sharedNotesA = document.createElement('a');
   sharedNotesA.target = '_blank';
-  sharedNotesA.href = `https://github.com/${state.userName}/${state.repoName}/tree/master/shared-notes/${module.name}.md`;
+  sharedNotesA.href = `https://github.com/${state.userName}/${state.repoName}/tree/master/shared-notes/${module.repo}.md`;
   sharedNotesA.appendChild(sharedNotesButton);
 
   const allIssuesButton = document.createElement('button');
@@ -51,19 +51,26 @@ export default (state, module) => {
 
   const allIssues = document.createElement('a');
   allIssues.target = '_blank';
-  allIssues.href = `https://github.com/${state.userName}/${state.repoName}/issues?q=milestone%${module.name}`;
+  allIssues.href = `https://github.com/${state.userName}/${state.repoName}/issues?q=milestone%3A${module.repo}`;
   allIssues.appendChild(allIssuesButton);
 
-  // const studentsButton = document.createElement('button');
-  // studentsButton.innerHTML = 'All student assignments';
-  // studentsButton.onclick = async () => {
-  //   const moduleEl = await renderModule(state, module);
-  //   state.body.innerHTML = '';
-  //   state.body.appendChild(moduleEl);
-  // };
+  const studentsButton = document.createElement('button');
+  studentsButton.innerHTML = 'View Details';
+  studentsButton.onclick = async () => {
+    const moduleEl = await renderModule(state, module);
+    state.body.innerHTML = '';
+    state.body.appendChild(moduleEl);
+  };
 
   // const moduleInfo = [status, studentsButton, boardA, repoA, sharedNotesA]
-  const moduleInfo = [status, boardA, allIssues, repoA, sharedNotesA]
+  const moduleInfo = [
+    status,
+    boardA,
+    allIssues,
+    studentsButton,
+    repoA,
+    sharedNotesA,
+  ]
     .map(item => {
       const li = document.createElement('li');
       li.appendChild(item);

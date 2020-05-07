@@ -1,4 +1,4 @@
-import studentThumb from './student-thumb.js'
+import studentThumb from './student/thumb.js'
 import moduleThumb from './module-thumb.js'
 import assignments from './assignments.js'
 

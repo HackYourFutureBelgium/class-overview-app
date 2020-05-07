@@ -43,19 +43,19 @@ export default async (state, student) => {
   bioLink.target = '_blank';
   bioLink.appendChild(bioButton);
 
-  // const allAssignments = document.createElement('button');
-  // allAssignments.innerHTML = 'Review all assignments';
-  // allAssignments.onclick = async () => {
-  //   const studentEl = await renderStudent(state, student);
-  //   state.body.innerHTML = '';
-  //   state.body.appendChild(studentEl);
-  // };
+  const allAssignments = document.createElement('button');
+  allAssignments.innerHTML = 'View Details';
+  allAssignments.onclick = async () => {
+    const studentEl = await renderStudent(state, student);
+    state.body.innerHTML = '';
+    state.body.appendChild(studentEl);
+  };
 
   const allIssuesButton = document.createElement('button');
   allIssuesButton.innerHTML = 'All Issues';
 
   const allIssues = document.createElement('a');
-  allIssues.href = `https://github.com/${state.repoName}/${state.repoName}/issues?q=author%${student.userName}`;
+  allIssues.href = `https://github.com/${state.repoName}/${state.repoName}/issues?q=author%3A${student.userName}`;
   allIssues.target = '_blank';
   allIssues.appendChild(allIssuesButton);
 
@@ -73,6 +73,7 @@ export default async (state, student) => {
     nameComponent,
     className,
     allIssues,
+    allAssignments,
     githubLink,
     personalPageLink,
     bioLink,

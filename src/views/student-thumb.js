@@ -1,7 +1,6 @@
-import renderStudent from './student.js'
+import renderStudent from './student.js';
 
 export default async (state, student) => {
-
   if (student.views && student.views.thumb) {
     return student.views.thumb;
   }
@@ -12,15 +11,13 @@ export default async (state, student) => {
   studentImg.className = 'student-thumb-img';
   fetch('https://api.github.com/users/' + student.userName)
     .then(res => res.json())
-    .then(userData => studentImg.src = userData.avatar_url)
+    .then(userData => (studentImg.src = userData.avatar_url))
     .catch(err => console.log(err));
-
 
   const nameComponent = document.createElement('h2');
   nameComponent.innerHTML = student.name;
   // nameComponent.style = 'margin-top:0%';
   nameComponent.className = 'student-thumb-name';
-
 
   const githubButton = document.createElement('button');
   githubButton.innerHTML = 'github.com/' + student.userName;
@@ -30,7 +27,6 @@ export default async (state, student) => {
   githubLink.target = '_blank';
   githubLink.appendChild(githubButton);
 
-
   const personalPageButton = document.createElement('button');
   personalPageButton.innerHTML = student.userName + '.github.io';
 
@@ -38,7 +34,6 @@ export default async (state, student) => {
   personalPageLink.href = 'https://' + student.userName + '.github.io';
   personalPageLink.target = '_blank';
   personalPageLink.appendChild(personalPageButton);
-
 
   const bioButton = document.createElement('button');
   bioButton.innerHTML = 'Student bio';
@@ -48,25 +43,40 @@ export default async (state, student) => {
   bioLink.target = '_blank';
   bioLink.appendChild(bioButton);
 
-  const allAssignments = document.createElement('button');
-  allAssignments.innerHTML = 'Review all assignments';
-  allAssignments.onclick = async () => {
-    const studentEl = await renderStudent(state, student);
-    state.body.innerHTML = '';
-    state.body.appendChild(studentEl);
-  }
+  // const allAssignments = document.createElement('button');
+  // allAssignments.innerHTML = 'Review all assignments';
+  // allAssignments.onclick = async () => {
+  //   const studentEl = await renderStudent(state, student);
+  //   state.body.innerHTML = '';
+  //   state.body.appendChild(studentEl);
+  // };
+
+  const allIssuesButton = document.createElement('button');
+  allIssuesButton.innerHTML = 'All Issues';
+
+  const allIssues = document.createElement('a');
+  allIssues.href = `https://github.com/${state.repoName}/${state.repoName}/issues?q=author%${student.userName}`;
+  allIssues.target = '_blank';
+  allIssues.appendChild(allIssuesButton);
 
   const className = (() => {
     if (typeof student.class === 'number') {
       const classNumEl = document.createElement('text');
-      classNumEl.innerHTML = "Class " + student.class;
+      classNumEl.innerHTML = 'Class ' + student.class;
       return classNumEl;
     } else {
       return null;
     }
-  })()
-
-  const studentInfo = [nameComponent, className, allAssignments, githubLink, personalPageLink, bioLink]
+  })();
+  // const studentInfo = [nameComponent, className, allAssignments, githubLink, personalPageLink, bioLink]
+  const studentInfo = [
+    nameComponent,
+    className,
+    allIssues,
+    githubLink,
+    personalPageLink,
+    bioLink,
+  ]
     .filter(item => item instanceof Element)
     .map(item => {
       const li = document.createElement('li');
@@ -77,7 +87,6 @@ export default async (state, student) => {
       ul.appendChild(li);
       return ul;
     }, document.createElement('ul'));
-
 
   const container = document.createElement('div');
   container.id = student.name;
@@ -94,5 +103,4 @@ export default async (state, student) => {
     student.views.thumb = container;
   }
   return container;
-
-}
+};

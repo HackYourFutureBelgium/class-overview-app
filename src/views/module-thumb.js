@@ -1,27 +1,29 @@
-import renderModule from './module.js'
+import renderModule from './module.js';
 
 export default (state, module) => {
-
   if (module.views && module.views.thumb) return module.views.thumb;
 
   const title = document.createElement('h1');
   title.innerHTML = module.name || module.repo;
-
 
   const status = document.createElement('text');
   // status.style.fontWeight = 'bold';
   status.className = 'module-thumb-status';
   status.innerHTML = module.status;
 
-
   const boardButton = document.createElement('button');
   boardButton.innerHTML = 'Homework Board';
 
   const boardA = document.createElement('a');
   boardA.target = '_blank';
-  boardA.href = "https://github.com/" + state.userName + "/" + state.repoName + "/projects/" + module.board;
+  boardA.href =
+    'https://github.com/' +
+    state.userName +
+    '/' +
+    state.repoName +
+    '/projects/' +
+    module.board;
   boardA.appendChild(boardButton);
-
 
   const repoButton = document.createElement('button');
   repoButton.innerHTML = 'Module Repo';
@@ -29,29 +31,39 @@ export default (state, module) => {
   const repoA = document.createElement('a');
   repoA.target = '_blank';
   const repoName = module.repo || module.name;
-  repoA.href = "https://github.com/" + (module.userName || state.userName) + "/" + repoName;
+  repoA.href =
+    'https://github.com/' +
+    (module.userName || state.userName) +
+    '/' +
+    repoName;
   repoA.appendChild(repoButton);
-
 
   const sharedNotesButton = document.createElement('button');
   sharedNotesButton.innerHTML = 'Shared notes';
 
   const sharedNotesA = document.createElement('a');
   sharedNotesA.target = '_blank';
-  sharedNotesA.href = `https://github.com/${state.userName}/${state.repoName}/tree/master/shared-notes/${module.number}-${module.name}.md`;
+  sharedNotesA.href = `https://github.com/${state.userName}/${state.repoName}/tree/master/shared-notes/${module.name}.md`;
   sharedNotesA.appendChild(sharedNotesButton);
 
+  const allIssuesButton = document.createElement('button');
+  allIssuesButton.innerHTML = 'All Issues';
 
-  const studentsButton = document.createElement('button');
-  studentsButton.innerHTML = 'All student assignments';
-  studentsButton.onclick = async () => {
-    const moduleEl = await renderModule(state, module);
-    state.body.innerHTML = '';
-    state.body.appendChild(moduleEl);
-  }
+  const allIssues = document.createElement('a');
+  allIssues.target = '_blank';
+  allIssues.href = `https://github.com/${state.userName}/${state.repoName}/issues?q=milestone%${module.name}`;
+  allIssues.appendChild(allIssuesButton);
 
+  // const studentsButton = document.createElement('button');
+  // studentsButton.innerHTML = 'All student assignments';
+  // studentsButton.onclick = async () => {
+  //   const moduleEl = await renderModule(state, module);
+  //   state.body.innerHTML = '';
+  //   state.body.appendChild(moduleEl);
+  // };
 
-  const moduleInfo = [status, studentsButton, boardA, repoA, sharedNotesA]
+  // const moduleInfo = [status, studentsButton, boardA, repoA, sharedNotesA]
+  const moduleInfo = [status, boardA, allIssues, repoA, sharedNotesA]
     .map(item => {
       const li = document.createElement('li');
       li.appendChild(item);
@@ -75,7 +87,4 @@ export default (state, module) => {
   module.views.thumb = container;
 
   return container;
-
-}
-
-
+};

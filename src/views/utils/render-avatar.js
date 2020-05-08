@@ -7,7 +7,7 @@ export default (user) => {
 
   const userImg = document.createElement('img');
   userImg.alt = `avatar: ${user.userName}`;
-  userImg.className = 'user-thumb-img';
+  userImg.className = 'student-thumb-img';
   userImg.src = `https://github.com/${user.userName}.png?size=150`
 
   user.img = userImg;

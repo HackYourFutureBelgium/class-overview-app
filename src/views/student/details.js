@@ -55,27 +55,27 @@ export default (state, student) => {
   issues.innerHTML = 'class issues: ';
   issues.appendChild(linkButton(
     'homework ',
-    `https://github.com/${state.repoName}/${state.repoName}/issues?q=author%3A${student.userName}+label%3Ahomework`
+    `https://github.com/${state.userName}/${state.repoName}/issues?q=author%3A${student.userName}+label%3Ahomework`
   ));
   issues.appendChild(linkButton(
     'check-in',
-    `https://github.com/${state.repoName}/${state.repoName}/issues?q=author%3A${student.userName}+label%3Awednesday-check-in`
+    `https://github.com/${state.userName}/${state.repoName}/issues?q=author%3A${student.userName}+label%3Awednesday-check-in`
   ));
   issues.appendChild(linkButton(
     'sunday review',
-    `https://github.com/${state.repoName}/${state.repoName}/issues?q=author%3A${student.userName}+label%3Asunday-review`
+    `https://github.com/${state.userName}/${state.repoName}/issues?q=author%3A${student.userName}+label%3Asunday-review`
   ));
   issues.appendChild(linkButton(
     'authored',
-    `https://github.com/${state.repoName}/${state.repoName}/issues?q=author%3A${student.userName}`
+    `https://github.com/${state.userName}/${state.repoName}/issues?q=author%3A${student.userName}`
   ));
   issues.appendChild(linkButton(
     'assigned ',
-    `https://github.com/${state.repoName}/${state.repoName}/issues?q=assignee%3A${student.userName}`
+    `https://github.com/${state.userName}/${state.repoName}/issues?q=assignee%3A${student.userName}`
   ));
   issues.appendChild(linkButton(
     'pull requests',
-    `https://github.com/${state.repoName}/${state.repoName}/issues?q=author%3A${student.userName}+isis%3Apr`
+    `https://github.com/${state.userName}/${state.repoName}/issues?q=author%3A${student.userName}+isis%3Apr`
   ));
 
   const staticLinks = listify([

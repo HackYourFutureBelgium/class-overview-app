@@ -74,8 +74,30 @@ export default (state, module) => {
     `https://github.com/${state.userName}/${module.repoName}`
   );
 
+  const moduleRepo = document.createElement('div');
+  moduleRepo.style = 'display: inline;';
+  moduleRepo.innerHTML = 'module repository';
+  moduleRepo.appendChild(linkButton(
+    'main page',
+    `https://github.com/${state.userName}/${state.repoName}/issues/q=milestone%3A${module.milestone}+label%3Awednesday-check-in`
+  ));
+  if (module.weeks) {
+    for (let i = 1; i <= module.weeks; i++) {
+      moduleRepo.appendChild(document.createElement('br'));
+      moduleRepo.appendChild(document.createTextNode(`week ${i}:`));
+      moduleRepo.appendChild(linkButton(
+        `assignments`,
+        `https://github.com/${module.userName || state.userName}/${module.repoName}/tree/master/week-${i}`
+      ));
+      moduleRepo.appendChild(linkButton(
+        `lesson plan`,
+        `https://hackyourfuture.be/${module.repoName}/week-${i}`
+      ));
+    }
+  }
+
   const staticLinks = listify([
-    repoLink,
+    moduleRepo,
     homeworkBoard,
     checkIns,
     sundayReviews,
@@ -108,12 +130,14 @@ export default (state, module) => {
 
       const homeworkProgress = linkButton(
         'homework progress',
-        `https://github.com/${state.userName}/${state.repoName}/projects/${module.board}?q=author%3A${student.userName}`
+        `https://github.com/${state.userName}/${state.repoName}/projects/${module.board}?card_filter_query=author%3A${student.userName}`
       );
       const homeworkIssues = linkButton(
         'all authored issues',
         `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone=${module.milestone}+author%3A${student.userName}`
       );
+
+
       const linksList = listify([
         nameComponent,
         userNameComponent,
@@ -158,7 +182,7 @@ export default (state, module) => {
 
       const toReview = linkButton(
         'homework to review',
-        `https://github.com/${state.userName}/${state.repoName}/projects/${module.board}?q=assignee%3A${coach.userName}`
+        `https://github.com/${state.userName}/${state.repoName}/projects/${module.board}?card_filter_query=assignee%3A${coach.userName}`
       );
       const allAssigned = linkButton(
         'all assigned issues',

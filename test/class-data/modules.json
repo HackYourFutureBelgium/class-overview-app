@@ -13,27 +13,31 @@
     "repoName": "working-with-code",
     "status": "in progress",
     "board": 1,
-    "milestone": 9
+    "milestone": 9,
+    "weeks": 3
   },
   {
     "number": 1,
     "repoName": "incremental-development",
     "status": "in progress",
     "board": 2,
-    "milestone": 1
+    "milestone": 1,
+    "weeks": 3
   },
   {
     "number": 2,
     "repoName": "separation-of-concerns",
     "status": "in progress",
     "board": 3,
-    "milestone": 1
+    "milestone": 1,
+    "weeks": 3
   },
   {
     "number": 3,
     "repoName": "state",
     "status": "to do",
     "board": 4,
-    "milestone": 4
+    "milestone": 4,
+    "weeks": 3
   }
 ]

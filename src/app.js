@@ -1,6 +1,7 @@
 import studentThumb from './views/student/thumb.js'
 import moduleThumb from './views/module/thumb.js'
 import studentDetails from './views/student/details.js'
+import coachDetails from './views/coach/details.js'
 import moduleDetails from './views/module/details.js'
 import randomizer from './views/randomizer.js'
 import home from "./views/home.js"
@@ -68,6 +69,8 @@ export default (state, container) => {
     state.body.appendChild(moduleThumb(state, state.currentModule));
   } else if (state.currentStudent) {
     state.body.appendChild(studentDetails(state, state.currentStudent));
+  } else if (state.currentCoach) {
+    state.body.appendChild(coachDetails(state, state.currentCoach));
   } else if (state.currentModule) {
     state.body.appendChild(moduleDetails(state, state.currentModule));
   } else {

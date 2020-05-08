@@ -1,42 +1,43 @@
 import classOverview from './app.js'
 
-export default async () => {
+export default () => {
 
-  const load = async path => {
-    console.log('... loading ', path)
-    try {
-      const res = await fetch(path);
-      return res.json();
-    } catch (err) {
-      console.log(err);
-      return err;
-    }
-  }
+  const load = path => fetch(path)
+    .then(res => res.json())
+    .catch(err => console.log(err));
 
-  const preState = await load('./class-data/index.json');
-  if (preState instanceof Error) return;
+  console.log('loading data ...');
 
-  preState.students = await load('./class-data/students.json');
-  if (preState.students instanceof Error) return;
+  Promise.all([
+    load('./class-data/index.json'),
+    load('./class-data/students.json'),
+    load('./class-data/coaches.json'),
+    load('./class-data/modules.json')
+  ])
+    .then(datas => {
+      console.log('building state ...');
+      const preState = datas[0];
+      preState.students = datas[1];
+      preState.coaches = datas[2];
+      preState.modules = datas[3];
+      preState.modules.forEach(module => {
+        module.coaches = [];
+        preState.coaches.forEach(coach => {
+          if (coach.modules.find(module => module.repoName)) {
+            module.coaches.push(coach);
+          }
+        });
+      })
 
-  preState.coaches = await load('./class-data/coaches.json');
-  if (preState.coaches instanceof Error) return;
+      console.log('rendering ...');
+      window.state = classOverview(preState, document.getElementById('root'));
 
-  preState.modules = await load('./class-data/modules.json');
-  if (preState.modules instanceof Error) return;
+      console.log('initial state:', state);
 
-  preState.modules.forEach(module => {
-    module.coaches = [];
-    preState.coaches.forEach(coach => {
-      if (coach.modules.find(module => module.repoName)) {
-        module.coaches.push(coach);
-      }
-    });
-  })
+    })
+    .catch(err => console.error(err));
 
-  console.log('... loading student pictures');
-  window.state = classOverview(preState, document.getElementById('root'));
 
-  console.log('initial state:', state);
+
 
 };

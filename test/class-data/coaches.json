@@ -8,7 +8,7 @@
         "role": "lead"
       },
       {
-        "repoName": "encapsulation",
+        "repoName": "incremental-development",
         "role": "lead"
       }
     ]
@@ -18,7 +18,7 @@
     "userName": "HackYourFutureBelgium",
     "modules": [
       {
-        "repoName": "web-apps",
+        "repoName": "working-with-code",
         "role": "lead"
       },
       {
@@ -26,7 +26,7 @@
         "role": "homework"
       },
       {
-        "repoName": "debugging",
+        "repoName": "separation-of-concerns",
         "role": "assistant"
       }
     ]

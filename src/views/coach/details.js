@@ -1,6 +1,5 @@
 import displayMany from '../utils/display-many.js'
 import renderAvatar from '../utils/render-avatar.js'
-import renderActivity from '../utils/render-activity.js'
 import linkButton from '../utils/link-button.js'
 import listify from '../utils/listify.js'
 
@@ -32,64 +31,32 @@ export default (state, coach) => {
 
   const img = renderAvatar(coach);
   imgAndStaticLinks.appendChild(img);
-
-  const githubLink = linkButton(
-    'repositories',
-    `https://github.com/${coach.userName}?tab=repositories`
+  const allAssigned = linkButton(
+    'issues: assigned',
+    `https://github.com/${state.repoName}/${state.repoName}/issues?q=assignee%3A${coach.userName}`
   );
-  const personalPageLink = linkButton(
-    'portfolio',
-    'https://' + coach.userName + '.github.io'
+  const allAuthored = linkButton(
+    'issues: authored',
+    `https://github.com/${state.repoName}/${state.repoName}/issues?q=author%3A${coach.userName}`
+  );
+  const githubLink = linkButton(
+    coach.userName,
+    `https://github.com/${coach.userName}?tab=repositories`
   );
   const bioLink = linkButton(
     'coach bio',
     `https://github.com/${state.userName}/${state.repoName}/tree/master/coach-bios/${coach.userName}.md`
   );
-  const learnables = linkButton(
-    'learnables',
-    `https://github.com/${coach.userName}/projects`
-  );
-
-  const issues = document.createElement('div');
-  issues.style = 'display: inline;';
-  issues.innerHTML = 'class issues: ';
-  issues.appendChild(linkButton(
-    'homework ',
-    `https://github.com/${state.repoName}/${state.repoName}/issues?q=author%3A${coach.userName}+label%3Ahomework`
-  ));
-  issues.appendChild(linkButton(
-    'check-in',
-    `https://github.com/${state.repoName}/${state.repoName}/issues?q=author%3A${coach.userName}+label%3Awednesday-check-in`
-  ));
-  issues.appendChild(linkButton(
-    'sunday review',
-    `https://github.com/${state.repoName}/${state.repoName}/issues?q=author%3A${coach.userName}+label%3Asunday-review`
-  ));
-  issues.appendChild(linkButton(
-    'authored',
-    `https://github.com/${state.repoName}/${state.repoName}/issues?q=author%3A${coach.userName}`
-  ));
-  issues.appendChild(linkButton(
-    'assigned ',
-    `https://github.com/${state.repoName}/${state.repoName}/issues?q=assignee%3A${coach.userName}`
-  ));
-  issues.appendChild(linkButton(
-    'pull requests',
-    `https://github.com/${state.repoName}/${state.repoName}/issues?q=author%3A${coach.userName}+isis%3Apr`
-  ));
 
   const staticLinks = listify([
-    issues,
-    learnables,
+    allAssigned,
+    allAuthored,
     githubLink,
-    personalPageLink,
     bioLink
   ]);
   imgAndStaticLinks.appendChild(staticLinks);
   container.appendChild(imgAndStaticLinks);
 
-  const activity = renderActivity(coach);
-  container.appendChild(activity);
 
 
   // specified module links
@@ -100,22 +67,37 @@ export default (state, coach) => {
 
   const specifiedModules = coach.modules
     .map(module => {
+      console.log(module)
+      module = Object.assign({}, module, state.modules.find(next => next.repoName === module.repoName));
+      console.log(module)
       const moduleContainer = document.createElement('div');
       moduleContainer.className = 'module-thumb';
 
       const moduleName = document.createElement('h3');
-      moduleName.innerHTML = module.number + '. ' + module.repoName;
+      moduleName.innerHTML = (module.number ? module.number + '. ' : '') + module.repoName;
       moduleContainer.appendChild(moduleName);
 
 
-      const homeworkIssues = linkButton(
-        'homework board (assigned)',
-        `https://github.com/${state.userName}/${state.repoName}/projects/${module.board}?q=assignee%3A${coach.userName}`
-      );
-      const homeworkProgress = linkButton(
-        'homework board (all)',
-        `https://github.com/${state.userName}/${state.repoName}/projects/${module.board}`
-      );
+      const homeworkBoard = document.createElement('div');
+      homeworkBoard.style = 'display: inline;';
+      homeworkBoard.appendChild(linkButton(
+        'homework board: all assignments',
+        `https://github.com/${state.userName}/${state.repoName}/projects/${module.board}/`
+      ));
+      homeworkBoard.appendChild(document.createElement('br'));
+      homeworkBoard.appendChild(linkButton(
+        'only assigned',
+        `https://github.com/${state.userName}/${state.repoName}/projects/${module.board}/?card_filter_query=assigned%3A${coach.userName}`
+      ));
+      if (module.weeks) {
+        for (let i = 1; i <= module.weeks; i++) {
+          homeworkBoard.appendChild(document.createElement('br'));
+          homeworkBoard.appendChild(linkButton(
+            `all week-${i}`,
+            `https://github.com/${state.userName}/${state.repoName}/projects/${module.board}/?card_filter_query=label%3Aweek-${i}`
+          ));
+        }
+      }
       const wednesdayCheckIns = linkButton(
         'issues: check-ins',
         `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone=${module.milestone}+label=wednesday-check-in`
@@ -132,15 +114,19 @@ export default (state, coach) => {
         'issues: authored',
         `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone=${module.milestone}+author%3A${coach.userName}`
       );
+      const moduleRepo = linkButton(
+        'module repo',
+        `https://github.com/${state.userName}/${state.repoName}`
+      );
 
 
       const linksList = listify([
-        homeworkIssues,
-        homeworkProgress,
+        homeworkBoard,
         wednesdayCheckIns,
         sundayReview,
         assigned,
-        all
+        all,
+        moduleRepo
       ]);
 
       moduleContainer.appendChild(linksList);

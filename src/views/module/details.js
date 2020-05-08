@@ -138,12 +138,17 @@ export default (state, module) => {
         `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone%3A${module.milestone}+author%3A${student.userName}`
       );
 
+      const assigned = linkButton(
+        'all assigned issues',
+        `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone%3A${module.milestone}+assingee%3A${student.userName}`
+      );
 
       const linksList = listify([
         nameComponent,
         userNameComponent,
         homeworkProgress,
         homeworkIssues,
+        assigned
       ]);
 
       studentContainer.appendChild(linksList);
@@ -189,6 +194,10 @@ export default (state, module) => {
         'all assigned issues',
         `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone%3A${module.milestone}+assignee%3A${coach.userName}`
       );
+      const allAuthored = linkButton(
+        'all authored issues',
+        `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone%3A${module.milestone}+author%3A${coach.userName}`
+      );
 
       let role;
       if (Array.isArray(coach.modules)) {
@@ -207,6 +216,7 @@ export default (state, module) => {
         // userNameComponent,
         toReview,
         allAssigned,
+        allAuthored
       ]);
 
       coachContainer.appendChild(linksList);

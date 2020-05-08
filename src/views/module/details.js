@@ -69,9 +69,9 @@ export default (state, module) => {
     'all issues',
     `https://github.com/${state.userName}/${state.repoName}/issues/q=milestone%3A${module.milestone}`
   );
-  const repoLink = linkButton(
+  const sharedNotes = linkButton(
     'module repo',
-    `https://github.com/${state.userName}/${module.repoName}`
+    `https://github.com/${state.userName}/${state.repoName}/tree/master/shared-notes/${module.repoName}.md`
   );
 
   const moduleRepo = document.createElement('div');
@@ -102,6 +102,7 @@ export default (state, module) => {
     checkIns,
     sundayReviews,
     allIssues,
+    sharedNotes,
   ]);
   container.appendChild(staticLinks);
 

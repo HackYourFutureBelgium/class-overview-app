@@ -1,4 +1,4 @@
-import renderStudentThumb from './student/thumb.js'
+import renderStudentThumb from './student-thumb.js'
 
 // could permalink this by simply pushing student indices in group order as param
 export default (state) => {
@@ -27,7 +27,7 @@ export default (state) => {
   const groupsContainer = document.createElement('div');
   container.appendChild(groupsContainer);
 
-  function displayGroups() {
+  async function displayGroups() {
     groupsContainer.innerHTML = '';
     const rand = Math.random();
     // debugger;
@@ -46,7 +46,7 @@ export default (state) => {
         const groupContainer = document.createElement('div');
         groupContainer.style = 'display: flex; flex-direction: row; flex-wrap: wrap;';
         for (let currentStudent of group) {
-          const studentThumb = renderStudentThumb(state, currentStudent);
+          const studentThumb = await renderStudentThumb(state, currentStudent);
           groupContainer.appendChild(studentThumb)
         }
         groupsContainer.appendChild(groupContainer);

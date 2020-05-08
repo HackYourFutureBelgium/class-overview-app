@@ -2,7 +2,7 @@
   "description": "the exercises/projects/assessments, status, and project board number for each module.  If either 'exercises', 'projects' or 'assignments' is present at app init, it will assume you are working on frozen assignments and won't fetch from the repo (so you past class' overview apps don't change as the curriculum does)",
   "type": "object",
   "properties": {
-    "repoName": {
+    "name": {
       "type": "string",
       "description": "the repo-name for this module, hosted on the organization. Students are not expected to have a repo of this name"
     },
@@ -18,17 +18,37 @@
       "type": "number",
       "description": "indicates the number of this module's project board in the class repo. used to generate links to project boards"
     },
+    "projects": {
+      "type": "array",
+      "description": "all projects a student is expected to have for this module",
+      "items": {
+        "type": "$ref/assignment.json",
+        "description": "an overview of what the dashboard for look for in each project"
+      }
+    },
+    "exercises": {
+      "type": "array",
+      "description": "all exercises a student is expected to have for this module",
+      "items": {
+        "type": "$ref/assignment.json",
+        "description": "an overview of what the dashboard for look for in each exercise"
+      }
+    },
+    "assessments": {
+      "type": "array",
+      "description": "all assessments a student is expected to have for this module",
+      "items": {
+        "type": "$ref/assignment.json",
+        "description": "an overview of what the dashboard for look for in each assessment"
+      }
+    },
     "userName": {
       "type": "string",
       "description": "optional.  if present, this is used to generate link to repo. otherwise state.userName is used. This is useful if you are using a fork of some module"
     },
-    "weeks": {
-      "type": "number",
-      "description": "optional.  if present, is used to generate specified links"
-    },
     "coaches": {
       "type": "array",
-      "description": "all coaches that helped to teach this module, generated dynamically from coach data",
+      "description": "all coaches that helped to teach this module",
       "items": {
         "type": "object",
         "properties": {
@@ -39,10 +59,6 @@
           "userName": {
             "type": "string",
             "description": "their github user name"
-          },
-          "role": {
-            "type": "string",
-            "description": "the role they played for this module"
           }
         }
       }

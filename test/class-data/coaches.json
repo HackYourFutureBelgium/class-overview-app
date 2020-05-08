@@ -3,20 +3,32 @@
     "name": "Octo Cat",
     "userName": "octocat",
     "modules": [
-      "state",
-      "encapsulation",
-      "working-with-code"
-    ],
-    "role": "lead"
+      {
+        "repoName": "state",
+        "role": "lead"
+      },
+      {
+        "repoName": "encapsulation",
+        "role": "lead"
+      }
+    ]
   },
   {
     "name": "HYF Be",
     "userName": "HackYourFutureBelgium",
     "modules": [
-      "incremental-development",
-      "web-apps",
-      "working-with-code"
-    ],
-    "role": "homework"
+      {
+        "repoName": "web-apps",
+        "role": "lead"
+      },
+      {
+        "repoName": "state",
+        "role": "homework"
+      },
+      {
+        "repoName": "debugging",
+        "role": "assistant"
+      }
+    ]
   }
 ]

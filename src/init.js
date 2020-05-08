@@ -1,3 +1,5 @@
+import classOverview from './app.js'
+
 export default async () => {
 
   const load = async path => {
@@ -26,17 +28,14 @@ export default async () => {
   preState.modules.forEach(module => {
     module.coaches = [];
     preState.coaches.forEach(coach => {
-      if (coach.modules.indexOf(module.name) !== -1) {
-        module.coaches.push(coach);
-      }
-      if (coach.modules.indexOf(module.number) !== -1) {
+      if (coach.modules.find(module => module.repoName)) {
         module.coaches.push(coach);
       }
     });
   })
 
   console.log('... loading student pictures');
-  window.state = await classOverview(preState, document.getElementById('root'));
+  window.state = classOverview(preState, document.getElementById('root'));
 
   console.log('initial state:', state);
 

@@ -1,93 +1,67 @@
-import renderStudent from './student.js';
+import details from './details.js';
+import renderAvatar from '../utils/render-avatar.js'
+import linkButton from '../utils/link-button.js'
+import listify from '../utils/listify.js'
 
-export default async (state, student) => {
-  if (student.views && student.views.thumb) {
-    return student.views.thumb;
-  }
+export default (state, student) => {
 
-  const studentImg = document.createElement('img');
-  studentImg.alt = student.name + ' - ' + student.userName;
-  // studentImg.style = 'height:130px;width:130px;';
-  studentImg.className = 'student-thumb-img';
-  fetch('https://api.github.com/users/' + student.userName)
-    .then(res => res.json())
-    .then(userData => (studentImg.src = userData.avatar_url))
-    .catch(err => console.log(err));
+  const studentImg = renderAvatar(student);
 
   const nameComponent = document.createElement('h2');
   nameComponent.innerHTML = student.name;
   // nameComponent.style = 'margin-top:0%';
   nameComponent.className = 'student-thumb-name';
 
-  const githubButton = document.createElement('button');
-  githubButton.innerHTML = 'github.com/' + student.userName;
+  const githubLink = linkButton(
+    student.userName,
+    `https://github.com/${student.userName}?tab=repositories`
+  );
 
-  const githubLink = document.createElement('a');
-  githubLink.href = 'https://github.com/' + student.userName;
-  githubLink.target = '_blank';
-  githubLink.appendChild(githubButton);
+  const personalPageLink = linkButton(
+    'portfolio',
+    `https://${student.userName}.github.io`
+  );
 
-  const personalPageButton = document.createElement('button');
-  personalPageButton.innerHTML = student.userName + '.github.io';
 
-  const personalPageLink = document.createElement('a');
-  personalPageLink.href = 'https://' + student.userName + '.github.io';
-  personalPageLink.target = '_blank';
-  personalPageLink.appendChild(personalPageButton);
+  const bioLink = linkButton(
+    'student bio',
+    `https://github.com/${state.userName}/${state.repoName}/tree/master/student-bios/${student.userName}.md`
+  );
 
-  const bioButton = document.createElement('button');
-  bioButton.innerHTML = 'Student bio';
 
-  const bioLink = document.createElement('a');
-  bioLink.href = `https://github.com/${state.userName}/${state.repoName}/tree/master/student-bios/${student.userName}.md`;
-  bioLink.target = '_blank';
-  bioLink.appendChild(bioButton);
-
-  const allAssignments = document.createElement('button');
-  allAssignments.innerHTML = 'View Details';
-  allAssignments.onclick = async () => {
-    const studentEl = await renderStudent(state, student);
+  const detailsEl = document.createElement('button');
+  detailsEl.innerHTML = 'details';
+  detailsEl.onclick = () => {
+    const studentEl = details(state, student);
     state.body.innerHTML = '';
     state.body.appendChild(studentEl);
   };
 
-  const allIssuesButton = document.createElement('button');
-  allIssuesButton.innerHTML = 'All Issues';
+  const allIssues = linkButton(
+    'all issues',
+    `https://github.com/${state.repoName}/${state.repoName}/issues?q=author%3A${student.userName}`
+  );
 
-  const allIssues = document.createElement('a');
-  allIssues.href = `https://github.com/${state.repoName}/${state.repoName}/issues?q=author%3A${student.userName}`;
-  allIssues.target = '_blank';
-  allIssues.appendChild(allIssuesButton);
 
   const className = (() => {
-    if (typeof student.class === 'number') {
+    if (student.className) {
       const classNumEl = document.createElement('text');
-      classNumEl.innerHTML = 'Class ' + student.class;
+      classNumEl.innerHTML = student.className;
       return classNumEl;
     } else {
       return null;
     }
   })();
-  // const studentInfo = [nameComponent, className, allAssignments, githubLink, personalPageLink, bioLink]
-  const studentInfo = [
+
+  const studentInfo = listify([
     nameComponent,
     className,
-    allIssues,
-    allAssignments,
     githubLink,
-    personalPageLink,
     bioLink,
-  ]
-    .filter(item => item instanceof Element)
-    .map(item => {
-      const li = document.createElement('li');
-      li.appendChild(item);
-      return li;
-    })
-    .reduce((ul, li) => {
-      ul.appendChild(li);
-      return ul;
-    }, document.createElement('ul'));
+    personalPageLink,
+    allIssues,
+    detailsEl,
+  ]);
 
   const container = document.createElement('div');
   container.id = student.name;
@@ -97,11 +71,5 @@ export default async (state, student) => {
   container.appendChild(studentImg);
   container.appendChild(studentInfo);
 
-  if (!student.views) {
-    student.views = {};
-    student.views.thumb = container;
-  } else {
-    student.views.thumb = container;
-  }
   return container;
 };

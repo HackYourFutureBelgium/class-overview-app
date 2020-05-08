@@ -71,8 +71,9 @@
   padding-right: 3%;
 }
 .student-thumb-img {
-  height: 130px;
-  width: 130px;
+  /* height: 150px;
+  width: 150px; */
+  align-self : center;
 }
 .student-thumb-name {
   margin-top:0%;

@@ -10,17 +10,22 @@
       "type": "string",
       "description": "their github handle. for creating a link to their account and their coach bio"
     },
-    "role": {
-      "type": "string",
-      "description": "lead, assistant, review, ... what kind of coach were they?"
-    },
     "modules": {
       "type": "array",
-      "items": [
-        "string",
-        "number"
-      ],
-      "description": "either the number or name of the module they taught.  this will be used to render them into the correct pages. this is an array because often coaches will teach multiple times for one class"
+      "items": {
+        "type": "object",
+        "properties": {
+          "module": {
+            "type": "string",
+            "description": "the repo name of the module"
+          },
+          "role": {
+            "type": "string",
+            "description": "what role the coach played for this module"
+          }
+        },
+        "description": "the modules this coach taught, and their role in that module"
+      }
     }
   }
 }

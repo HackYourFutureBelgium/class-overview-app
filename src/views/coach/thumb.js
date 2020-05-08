@@ -1,106 +1,56 @@
-export default (state, coach) => {
-  if (coach.views && coach.views.thumb) {
-    return coach.views.thumb;
-  }
+import details from './details.js';
+import renderAvatar from '../utils/render-avatar.js'
+import linkButton from '../utils/link-button.js'
+import listify from '../utils/listify.js'
 
-  const coachImg = document.createElement('img');
-  coachImg.alt = coach.name + ' - ' + coach.userName;
-  // coachImg.style = 'height:130px;width:130px;';
-  coachImg.className = 'student-thumb-img';
-  fetch('https://api.github.com/users/' + coach.userName)
-    .then(res => res.json())
-    .then(userData => (coachImg.src = userData.avatar_url))
-    .catch(err => console.log(err));
+export default (state, coach) => {
+
+  const coachImg = renderAvatar(coach);
 
   const nameComponent = document.createElement('h2');
   nameComponent.innerHTML = coach.name;
   // nameComponent.style = 'margin-top:0%';
-  nameComponent.className = 'coach-thumb-name';
+  nameComponent.className = 'student-thumb-name';
 
-  const githubButton = document.createElement('button');
-  githubButton.innerHTML = 'github.com/' + coach.userName;
+  const githubLink = linkButton(
+    coach.userName,
+    `https://github.com/${coach.userName}`
+  );
 
-  const githubLink = document.createElement('a');
-  githubLink.href = 'https://github.com/' + coach.userName;
-  githubLink.target = '_blank';
-  githubLink.appendChild(githubButton);
+  const bioLink = linkButton(
+    'coach bio',
+    `https://github.com/${state.userName}/${state.repoName}/tree/master/coach-bios/${coach.userName}.md`
+  );
 
-  const bioButton = document.createElement('button');
-  bioButton.innerHTML = 'coach bio';
+  const detailsButton = document.createElement('button');
+  detailsButton.innerHTML = 'details';
+  detailsButton.onclick = () => {
+    const moduleEl = details(state, coach);
+    state.body.innerHTML = '';
+    state.body.appendChild(moduleEl);
+  };
 
-  const bioLink = document.createElement('a');
-  bioLink.href = `https://github.com/${state.userName}/${state.repoName}/tree/master/coach-bios/${coach.userName}.md`;
-  bioLink.target = '_blank';
-  bioLink.appendChild(bioButton);
+  const assignedIssues = linkButton(
+    'assigned issues',
+    `https://github.com/${state.repoName}/${state.repoName}/issues?q=assignee%3A${coach.userName}`
+  );
 
 
-  const allIssuesButton = document.createElement('button');
-  allIssuesButton.innerHTML = 'assigned issues';
+  const modules = coach.modules
+    .map(next => {
+      const text = document.createElement('text');
+      text.innerHTML = `<code>${next.repoName}</code>`;
+      return text;
+    });
 
-  const allIssues = document.createElement('a');
-  allIssues.href =
-    `https://github.com/${state.userName}/${state.repoName}/issues?q=assignee%3A${coach.userName}`;
-  allIssues.target = '_blank';
-  allIssues.appendChild(allIssuesButton);
-
-  const className = (() => {
-    if (typeof coach.class === 'number') {
-      const classNumEl = document.createElement('text');
-      classNumEl.innerHTML = 'Class ' + coach.class;
-      return classNumEl;
-    } else {
-      return null;
-    }
-  })();
-
-  const roleType = (() => {
-    if (typeof coach.role === 'string') {
-      const roleTypeEl = document.createElement('text');
-      roleTypeEl.innerHTML = coach.role;
-      return roleTypeEl;
-    } else {
-      return null;
-    }
-  })();
-  console.log(roleType, coach.role);
-
-  const coachInfo = [
+  const coachInfo = listify([
     nameComponent,
-    roleType,
-    assignedIssues,
-    className,
     githubLink,
     bioLink,
-  ]
-    .filter(item => item instanceof Element)
-    .map(item => {
-      const li = document.createElement('li');
-      li.appendChild(item);
-      return li;
-    })
-    .reduce((ul, li) => {
-      ul.appendChild(li);
-      return ul;
-    }, document.createElement('ul'));
-  coachInfo.style = 'text-align: left';
-
-  coach.modules.forEach(module => {
-    const li = document.createElement('li');
-    const moduleButton = document.createElement('button');
-    moduleButton.innerHTML = '- ' + module;
-    const moduleA = document.createElement('a');
-    moduleA.href =
-      'https://' +
-      state.userName +
-      '.github.io/' +
-      state.repoName +
-      '?module=' +
-      module;
-    moduleA.target = '_blank';
-    moduleA.appendChild(moduleButton);
-    li.appendChild(moduleA);
-    coachInfo.appendChild(li);
-  });
+    assignedIssues,
+    ...modules,
+    detailsButton,
+  ]);
 
   const container = document.createElement('div');
   container.id = coach.name;
@@ -110,10 +60,5 @@ export default (state, coach) => {
   container.appendChild(coachImg);
   container.appendChild(coachInfo);
 
-  if (coach.views) {
-    coach.views.thumb = container;
-  } else {
-    coach.views = { thumb: container };
-  }
   return container;
 };

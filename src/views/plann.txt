@@ -1,0 +1,3 @@
+0 - render home
+
+1 - student details

@@ -9,6 +9,10 @@
     "userName": {
       "type": "string",
       "description": "their github handle"
+    },
+    "className": {
+      "type": "string",
+      "description": "their class's name"
     }
   }
 }

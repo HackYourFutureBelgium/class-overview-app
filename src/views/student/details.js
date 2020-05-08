@@ -1,47 +1,160 @@
-import studentThumb from './student/thumb.js'
-import moduleThumb from './module-thumb.js'
-import assignments from './assignments.js'
+import displayMany from '../utils/display-many.js'
+import renderAvatar from '../utils/render-avatar.js'
+import renderActivity from '../utils/render-activity.js'
+import linkButton from '../utils/link-button.js'
+import listify from '../utils/listify.js'
 
-export default async (state, student) => {
+export default (state, student) => {
   history.pushState({}, null, window.location.pathname + '?student=' + student.userName);
 
-  const container = document.createElement('div')
-  container.className = 'students';
+  const container = document.createElement('div');
 
-  const renderedStudentThumb = await studentThumb(state, student);
-  container.appendChild(renderedStudentThumb);
+  // headers
+  const name = document.createElement('h1');
+  name.innerHTML = student.name;
+  container.appendChild(name);
+
+  const userName = document.createElement('h2');
+  userName.innerHTML = student.userName;
+  container.appendChild(userName);
+
+  if (student.className) {
+    const className = document.createElement('h3');
+    className.innerHTML = student.className;
+    container.appendChild(className);
+  }
+
+
+
+  // img & static links
+  const imgAndStaticLinks = document.createElement('div');
+  imgAndStaticLinks.style = 'display: flex; flex-direction: row; align-items : center';
+
+  const img = renderAvatar(student);
+  imgAndStaticLinks.appendChild(img);
+
+  const githubLink = linkButton(
+    'repositories',
+    `https://github.com/${student.userName}?tab=repositories`
+  );
+  const personalPageLink = linkButton(
+    'portfolio',
+    'https://' + student.userName + '.github.io'
+  );
+  const bioLink = linkButton(
+    'student bio',
+    `https://github.com/${state.userName}/${state.repoName}/tree/master/student-bios/${student.userName}.md`
+  );
+  const learnables = linkButton(
+    'learnables',
+    `https://github.com/${student.userName}/projects`
+  );
+
+  const issues = document.createElement('div');
+  issues.style = 'display: inline;';
+  issues.innerHTML = 'class issues: ';
+  issues.appendChild(linkButton(
+    'homework ',
+    `https://github.com/${state.repoName}/${state.repoName}/issues?q=author%3A${student.userName}+label%3Ahomework`
+  ));
+  issues.appendChild(linkButton(
+    'check-in',
+    `https://github.com/${state.repoName}/${state.repoName}/issues?q=author%3A${student.userName}+label%3Awednesday-check-in`
+  ));
+  issues.appendChild(linkButton(
+    'sunday review',
+    `https://github.com/${state.repoName}/${state.repoName}/issues?q=author%3A${student.userName}+label%3Asunday-review`
+  ));
+  issues.appendChild(linkButton(
+    'authored',
+    `https://github.com/${state.repoName}/${state.repoName}/issues?q=author%3A${student.userName}`
+  ));
+  issues.appendChild(linkButton(
+    'assigned ',
+    `https://github.com/${state.repoName}/${state.repoName}/issues?q=assignee%3A${student.userName}`
+  ));
+  issues.appendChild(linkButton(
+    'pull requests',
+    `https://github.com/${state.repoName}/${state.repoName}/issues?q=author%3A${student.userName}+isis%3Apr`
+  ));
+
+  const staticLinks = listify([
+    issues,
+    learnables,
+    githubLink,
+    personalPageLink,
+    bioLink
+  ]);
+  imgAndStaticLinks.appendChild(staticLinks);
+  container.appendChild(imgAndStaticLinks);
+
+  const activity = renderActivity(student);
+  container.appendChild(activity);
+
+
+  // specified module links
   container.appendChild(document.createElement('hr'));
 
-  for (const module of state.modules) {
-    const renderedModuleThumb = moduleThumb(state, module);
-    const renderedStudentAssignments = await assignments(module, student);
+  const specifiedTitle = document.createElement('h2');
+  specifiedTitle.innerHTML = `${student.name}: Module Links`;
+
+  const specifiedModules = state.modules
+    .map(module => {
+      const moduleContainer = document.createElement('div');
+      moduleContainer.className = 'module-thumb';
+
+      const moduleName = document.createElement('h3');
+      moduleName.innerHTML = module.number + '. ' + module.repoName;
+      moduleContainer.appendChild(moduleName);
+
+      const status = document.createElement('text');
+      status.innerHTML = module.status;
+
+      const homeworkProgress = linkButton(
+        'homework progress',
+        `https://github.com/${state.userName}/${state.repoName}/projects/${module.board}?q=author%3A${student.userName}`
+      );
+      const homeworkIssues = linkButton(
+        'issues: homework',
+        `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone=${module.milestone}+author%3A${student.userName}+label=homework`
+      );
+      const wednesdayCheckIns = linkButton(
+        'issues: check-ins',
+        `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone=${module.milestone}+author%3A${student.userName}+label=wednesday-check-in`
+      );
+      const sundayReview = linkButton(
+        'issues: sunday review',
+        `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone=${module.milestone}+author%3A${student.userName}+label=sunday-review`
+      );
+      const assigned = linkButton(
+        'issues: assigned',
+        `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone=${module.milestone}+assignee%3A${student.userName}`
+      );
+      const all = linkButton(
+        'issues: all',
+        `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone=${module.milestone}+author%3A${student.userName}`
+      );
 
 
-    container.appendChild(document.createElement('hr'));
+      const linksList = module.status === 'to do'
+        ? listify([status])
+        : listify([
+          status,
+          homeworkProgress,
+          homeworkIssues,
+          wednesdayCheckIns,
+          sundayReview,
+          assigned,
+          all
+        ]);
 
-    const permalinkButton = document.createElement('button');
-    permalinkButton.innerHTML = `review only ${student.userName}'s ${module.name} assignments`;
-    permalinkButton.onclick = () => {
+      moduleContainer.appendChild(linksList);
 
-      try {
-        history.pushState({}, null, `${window.location.pathname}?student=${student.userName}&module=${module.name}`);
-      } catch (err) { };
+      return moduleContainer;
+    });
 
-      container.innerHTML = '';
-      container.appendChild(renderedStudentThumb);
-      container.appendChild(document.createElement('hr'));
-      container.appendChild(document.createElement('hr'));
-      container.appendChild(renderedModuleThumb);
-      container.appendChild(renderedStudentAssignments);
-
-    }
-    container.appendChild(permalinkButton);
-
-    container.appendChild(renderedModuleThumb);
-    container.appendChild(renderedStudentAssignments);
-    container.appendChild(document.createElement('br'));
-    container.appendChild(document.createElement('hr'));
-  }
+  const perModule = displayMany(specifiedModules, specifiedTitle);
+  container.appendChild(perModule);
 
   return container;
 }

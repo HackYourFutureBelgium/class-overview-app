@@ -1,8 +1,9 @@
-import displayMany from './display-many.js';
-import moduleThumb from './module-thumb.js';
-import studentThumb from './student-thumb.js';
+import displayMany from './utils/display-many.js';
+import moduleThumb from './module/thumb.js';
+import studentThumb from './student/thumb.js';
+import coachThumb from './coach/thumb.js';
 
-export default async state => {
+export default (state) => {
   // try {
   //   history.pushState({}, null, window.location.pathname);
   // } catch (err) { };
@@ -11,12 +12,26 @@ export default async state => {
   container.className = 'home';
 
   container.appendChild(
-    await displayMany(state, state.modules, moduleThumb, 'Modules')
+    displayMany(
+      state.students.map(student => studentThumb(state, student)),
+      'Students: ' + state.repoName
+    )
   );
   container.appendChild(document.createElement('hr'));
   container.appendChild(document.createElement('hr'));
   container.appendChild(
-    await displayMany(state, state.students, studentThumb, 'Students')
+    displayMany(
+      state.coaches.map(coach => coachThumb(state, coach)),
+      'Coaches: ' + state.repoName
+    )
+  );
+  container.appendChild(document.createElement('hr'));
+  container.appendChild(document.createElement('hr'));
+  container.appendChild(
+    displayMany(
+      state.modules.map(module => moduleThumb(state, module)),
+      'Modules: ' + state.repoName
+    )
   );
 
   return container;

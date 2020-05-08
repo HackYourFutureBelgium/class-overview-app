@@ -1,97 +1,68 @@
-import renderModule from './module.js';
+import renderDetails from './details.js';
+import linkButton from '../utils/link-button.js'
+import listify from '../utils/listify.js'
 
 export default (state, module) => {
-  if (module.views && module.views.thumb) return module.views.thumb;
 
-  const title = document.createElement('h1');
-  title.innerHTML = module.name || module.repo;
+  const title = document.createElement('h2');
+  title.innerHTML = module.number + '. ' + module.repoName;
 
   const status = document.createElement('text');
   // status.style.fontWeight = 'bold';
   status.className = 'module-thumb-status';
-  status.innerHTML = module.status;
+  const weeksText = module.weeks
+    ? `${module.weeks} weeks: `
+    : '';
+  status.innerHTML = weeksText + module.status;
 
-  const boardButton = document.createElement('button');
-  boardButton.innerHTML = 'Homework Board';
 
-  const boardA = document.createElement('a');
-  boardA.target = '_blank';
-  boardA.href =
-    'https://github.com/' +
-    state.userName +
-    '/' +
-    state.repoName +
-    '/projects/' +
-    module.board;
-  boardA.appendChild(boardButton);
+  const boardA = linkButton(
+    'homework board',
+    `https://github.com/${state.userName}/${state.repoName}/projects/${module.board}`
+  );
 
-  const repoButton = document.createElement('button');
-  repoButton.innerHTML = 'Module Repo';
+  const repoA = linkButton(
+    'module repo',
+    `https://github.com/${module.userName || state.userName}/${module.repoName}`
+  );
 
-  const repoA = document.createElement('a');
-  repoA.target = '_blank';
-  const repoName = module.repo || module.name;
-  repoA.href =
-    'https://github.com/' +
-    (module.userName || state.userName) +
-    '/' +
-    repoName;
-  repoA.appendChild(repoButton);
+  const sharedNotesA = linkButton(
+    'shared notes',
+    `https://github.com/${state.userName}/${state.repoName}/tree/master/shared-notes/${module.repoName}.md`
+  );
 
-  const sharedNotesButton = document.createElement('button');
-  sharedNotesButton.innerHTML = 'Shared notes';
 
-  const sharedNotesA = document.createElement('a');
-  sharedNotesA.target = '_blank';
-  sharedNotesA.href = `https://github.com/${state.userName}/${state.repoName}/tree/master/shared-notes/${module.repo}.md`;
-  sharedNotesA.appendChild(sharedNotesButton);
+  const allIssues = linkButton(
+    'all issues',
+    `https://github.com/${state.userName}/${state.repoName}/issues?q=milestone%3A${module.repoName}`
+  );
 
-  const allIssuesButton = document.createElement('button');
-  allIssuesButton.innerHTML = 'All Issues';
 
-  const allIssues = document.createElement('a');
-  allIssues.target = '_blank';
-  allIssues.href = `https://github.com/${state.userName}/${state.repoName}/issues?q=milestone%3A${module.repo}`;
-  allIssues.appendChild(allIssuesButton);
-
-  const studentsButton = document.createElement('button');
-  studentsButton.innerHTML = 'View Details';
-  studentsButton.onclick = async () => {
-    const moduleEl = await renderModule(state, module);
+  const detailsButton = document.createElement('button');
+  detailsButton.innerHTML = 'details';
+  detailsButton.onclick = () => {
+    const moduleEl = renderDetails(state, module);
     state.body.innerHTML = '';
     state.body.appendChild(moduleEl);
   };
 
-  // const moduleInfo = [status, studentsButton, boardA, repoA, sharedNotesA]
-  const moduleInfo = [
+
+  // const moduleInfo = [status, detailsButton, boardA, repoA, sharedNotesA]
+  const moduleInfo = listify([
     status,
     boardA,
     allIssues,
-    studentsButton,
     repoA,
     sharedNotesA,
-  ]
-    .map(item => {
-      const li = document.createElement('li');
-      li.appendChild(item);
-      return li;
-    })
-    .reduce((ul, li) => {
-      ul.appendChild(li);
-      return ul;
-    }, document.createElement('ul'));
+    detailsButton,
+  ]);
 
   const container = document.createElement('div');
-  container.id = module.name;
+  container.id = module.repoNameName;
   // container.style = 'padding-right:5%;padding-left:5%;margin-bottom:3%;';
   container.className = 'module-thumb';
   container.appendChild(title);
   container.appendChild(moduleInfo);
-
-  if (!module.views) {
-    module.views = {};
-  }
-  module.views.thumb = container;
 
   return container;
 };

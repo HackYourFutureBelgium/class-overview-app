@@ -69,6 +69,7 @@
   flex-direction: row;
   align-items: center;
   padding: 2%;
+  border: solid black 1px;
 }
 .student-thumb-img {
   height: 150px;

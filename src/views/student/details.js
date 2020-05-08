@@ -112,7 +112,7 @@ export default (state, student) => {
 
       const homeworkProgress = linkButton(
         'homework progress',
-        `https://github.com/${state.userName}/${state.repoName}/projects/${module.board}/?card_filter_query=author%3A${student.userName}`
+        `https://github.com/${state.userName}/${state.repoName}/projects/${module.project}/?card_filter_query=author%3A${student.userName}`
       );
       const homeworkIssues = linkButton(
         'issues: homework',

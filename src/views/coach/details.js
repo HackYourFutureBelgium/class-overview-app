@@ -82,19 +82,19 @@ export default (state, coach) => {
       homeworkBoard.style = 'display: inline;';
       homeworkBoard.appendChild(linkButton(
         'homework board: all assignments',
-        `https://github.com/${state.userName}/${state.repoName}/projects/${module.board}/`
+        `https://github.com/${state.userName}/${state.repoName}/projects/${module.project}/`
       ));
       homeworkBoard.appendChild(document.createElement('br'));
       homeworkBoard.appendChild(linkButton(
         'only assigned',
-        `https://github.com/${state.userName}/${state.repoName}/projects/${module.board}/?card_filter_query=assigned%3A${coach.userName}`
+        `https://github.com/${state.userName}/${state.repoName}/projects/${module.project}/?card_filter_query=assigned%3A${coach.userName}`
       ));
       if (module.weeks) {
         for (let i = 1; i <= module.weeks; i++) {
           homeworkBoard.appendChild(document.createElement('br'));
           homeworkBoard.appendChild(linkButton(
             `all week-${i}`,
-            `https://github.com/${state.userName}/${state.repoName}/projects/${module.board}/?card_filter_query=label%3Aweek-${i}`
+            `https://github.com/${state.userName}/${state.repoName}/projects/${module.project}/?card_filter_query=label%3Aweek-${i}`
           ));
         }
       }

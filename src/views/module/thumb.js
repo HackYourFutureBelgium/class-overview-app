@@ -18,7 +18,7 @@ export default (state, module) => {
 
   const boardA = linkButton(
     'homework board',
-    `https://github.com/${state.userName}/${state.repoName}/projects/${module.board}`
+    `https://github.com/${state.userName}/${state.repoName}/projects/${module.project}`
   );
 
   const repoA = linkButton(

@@ -54,6 +54,7 @@
   padding-right: 5%;
   padding-left: 5%;
   margin-bottom: 3%;
+  border: solid black 1px;
 }
 .module-thumb-status {
   font-weight: bold;

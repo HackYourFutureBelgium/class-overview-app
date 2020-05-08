@@ -48,14 +48,16 @@ export default (state, module) => {
 
 
   // const moduleInfo = [status, detailsButton, boardA, repoA, sharedNotesA]
-  const moduleInfo = listify([
-    status,
-    boardA,
-    allIssues,
-    repoA,
-    sharedNotesA,
-    detailsButton,
-  ]);
+  const moduleInfo = module.status === 'to do'
+    ? listify([status])
+    : listify([
+      status,
+      boardA,
+      allIssues,
+      repoA,
+      sharedNotesA,
+      detailsButton,
+    ]);
 
   const container = document.createElement('div');
   container.id = module.repoNameName;

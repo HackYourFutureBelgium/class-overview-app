@@ -156,9 +156,10 @@ export default (state, module) => {
       return studentContainer;
     });
 
-  const perStudent = displayMany(specifiedStudents, specifiedStudentsTitle);
-  container.appendChild(perStudent);
-
+  if (module.status !== 'to do') {
+    const perStudent = displayMany(specifiedStudents, specifiedStudentsTitle);
+    container.appendChild(perStudent);
+  }
 
 
   // specified coaches links

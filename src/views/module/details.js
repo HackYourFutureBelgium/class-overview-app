@@ -70,7 +70,7 @@ export default (state, module) => {
     `https://github.com/${state.userName}/${state.repoName}/issues/q=milestone%3A${module.milestone}`
   );
   const sharedNotes = linkButton(
-    'module repo',
+    'shared notes',
     `https://github.com/${state.userName}/${state.repoName}/tree/master/shared-notes/${module.repoName}.md`
   );
 

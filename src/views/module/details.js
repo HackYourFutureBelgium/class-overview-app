@@ -134,7 +134,7 @@ export default (state, module) => {
       );
       const homeworkIssues = linkButton(
         'all authored issues',
-        `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone=${module.milestone}+author%3A${student.userName}`
+        `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone%3A${module.milestone}+author%3A${student.userName}`
       );
 
 
@@ -186,7 +186,7 @@ export default (state, module) => {
       );
       const allAssigned = linkButton(
         'all assigned issues',
-        `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone=${module.milestone}+assignee%3A${coach.userName}`
+        `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone%3A${module.milestone}+assignee%3A${coach.userName}`
       );
 
       let role;

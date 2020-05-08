@@ -12,9 +12,9 @@
     },
     "milestone": {
       "type": "number",
-      "description": "indicates the number of this module's milestone board in the class repo. used to generate links"
+      "description": "indicates the number of this module's milestone in the class repo. used to generate links"
     },
-    "board": {
+    "project": {
       "type": "number",
       "description": "indicates the number of this module's project board in the class repo. used to generate links to project boards"
     },

@@ -39,7 +39,7 @@ export default (state, student) => {
 
   const allIssues = linkButton(
     'all issues',
-    `https://github.com/${state.repoName}/${state.repoName}/issues?q=author%3A${student.userName}`
+    `https://github.com/${state.userName}/${state.repoName}/issues?q=author%3A${student.userName}`
   );
 
 

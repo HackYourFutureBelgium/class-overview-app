@@ -32,7 +32,7 @@ export default (state, coach) => {
 
   const assignedIssues = linkButton(
     'assigned issues',
-    `https://github.com/${state.repoName}/${state.repoName}/issues?q=assignee%3A${coach.userName}`
+    `https://github.com/${state.userName}/${state.repoName}/issues?q=assignee%3A${coach.userName}`
   );
 
 

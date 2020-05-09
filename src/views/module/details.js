@@ -79,7 +79,7 @@ export default (state, module) => {
   moduleRepo.innerHTML = 'module repository';
   moduleRepo.appendChild(linkButton(
     'main page',
-    `https://github.com/${state.userName}/${state.repoName}/issues/q=milestone%3A${module.milestone}+label%3Awednesday-check-in`
+    `https://github.com/${module.userName || state.userName}/${state.repoName}`
   ));
   if (module.weeks) {
     for (let i = 1; i <= module.weeks; i++) {
@@ -230,3 +230,4 @@ export default (state, module) => {
 
   return container;
 }
+

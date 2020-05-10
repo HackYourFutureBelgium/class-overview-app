@@ -81,7 +81,7 @@ export default (state, coach) => {
       const homeworkBoard = document.createElement('div');
       homeworkBoard.style = 'display: inline;';
       homeworkBoard.appendChild(linkButton(
-        'homework board: all assignments',
+        'homework board: all assigned assignments',
         `https://github.com/${state.userName}/${state.repoName}/projects/${module.project}/`
       ));
       homeworkBoard.appendChild(document.createElement('br'));
@@ -93,7 +93,7 @@ export default (state, coach) => {
         for (let i = 1; i <= module.weeks; i++) {
           homeworkBoard.appendChild(document.createElement('br'));
           homeworkBoard.appendChild(linkButton(
-            `all week-${i}`,
+            `all assigned week-${i}`,
             `https://github.com/${state.userName}/${state.repoName}/projects/${module.project}/?card_filter_query=label%3Aweek-${i}`
           ));
         }

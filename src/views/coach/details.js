@@ -87,7 +87,7 @@ export default (state, coach) => {
       homeworkBoard.appendChild(document.createElement('br'));
       homeworkBoard.appendChild(linkButton(
         'all assigned assignments',
-        `https://github.com/${state.userName}/${state.repoName}/projects/${module.project}/?card_filter_query=assigned%3A${coach.userName}`
+        `https://github.com/${state.userName}/${state.repoName}/projects/${module.project}/?card_filter_query=assignee%3A${coach.userName}`
       ));
       if (module.weeks) {
         for (let i = 1; i <= module.weeks; i++) {

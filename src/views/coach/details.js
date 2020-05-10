@@ -81,12 +81,12 @@ export default (state, coach) => {
       const homeworkBoard = document.createElement('div');
       homeworkBoard.style = 'display: inline;';
       homeworkBoard.appendChild(linkButton(
-        'homework board: all assigned assignments',
+        'homework board: all student assignments',
         `https://github.com/${state.userName}/${state.repoName}/projects/${module.project}/`
       ));
       homeworkBoard.appendChild(document.createElement('br'));
       homeworkBoard.appendChild(linkButton(
-        'only assigned',
+        'all assigned assignments',
         `https://github.com/${state.userName}/${state.repoName}/projects/${module.project}/?card_filter_query=assigned%3A${coach.userName}`
       ));
       if (module.weeks) {

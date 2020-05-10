@@ -100,19 +100,19 @@ export default (state, coach) => {
       }
       const wednesdayCheckIns = linkButton(
         'issues: check-ins',
-        `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone%3A${module.milestone}+label=wednesday-check-in`
+        `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone%3A${module.repoName}+label=wednesday-check-in`
       );
       const sundayReview = linkButton(
         'issues: sunday review',
-        `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone%3A${module.milestone}+label=sunday-review`
+        `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone%3A${module.repoName}+label=sunday-review`
       );
       const assigned = linkButton(
         'issues: assigned',
-        `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone%3A${module.milestone}+assignee%3A${coach.userName}`
+        `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone%3A${module.repoName}+assignee%3A${coach.userName}`
       );
       const all = linkButton(
         'issues: authored',
-        `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone%3A${module.milestone}+author%3A${coach.userName}`
+        `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone%3A${module.repoName}+author%3A${coach.userName}`
       );
       const moduleRepo = linkButton(
         'module repo',

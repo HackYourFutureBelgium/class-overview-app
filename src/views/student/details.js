@@ -113,20 +113,15 @@ export default (state, student) => {
       const homeworkBoard = document.createElement('div');
       homeworkBoard.style = 'display: inline;';
       homeworkBoard.appendChild(linkButton(
-        'homework board',
-        `https://github.com/${state.userName}/${state.repoName}/projects/${module.project}/`
-      ));
-      homeworkBoard.appendChild(document.createElement('br'));
-      homeworkBoard.appendChild(linkButton(
-        student.userName + ': all assignments',
-        `https://github.com/${state.userName}/${state.repoName}/projects/${module.project}/?card_filter_query=assignee%3A${student.userName}`
+        `homework board: ${student.userName}`,
+        `https://github.com/${state.userName}/${state.repoName}/projects/${module.project}/?card_filter_query=author%3A${student.userName}`
       ));
       if (module.weeks) {
         for (let i = 1; i <= module.weeks; i++) {
           homeworkBoard.appendChild(document.createElement('br'));
           homeworkBoard.appendChild(linkButton(
-            student.userName + `: all week-${i}`,
-            `https://github.com/${state.userName}/${state.repoName}/projects/${module.project}/?card_filter_query=label%3Aweek-${i}+assignee%3A${student.userName}`
+            student.userName + `: week-${i}`,
+            `https://github.com/${state.userName}/${state.repoName}/projects/${module.project}/?card_filter_query=label%3Aweek-${i}+author%3A${student.userName}`
           ));
         }
       }
@@ -146,8 +141,8 @@ export default (state, student) => {
         'issues: assigned',
         `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone%3A${module.milestone}+assignee%3A${student.userName}`
       );
-      const all = linkButton(
-        'issues: all',
+      const authored = linkButton(
+        'issues: authored',
         `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone%3A${module.milestone}+author%3A${student.userName}`
       );
 
@@ -160,8 +155,8 @@ export default (state, student) => {
           homeworkIssues,
           wednesdayCheckIns,
           sundayReview,
+          authored,
           assigned,
-          all
         ]);
 
       moduleContainer.appendChild(linksList);

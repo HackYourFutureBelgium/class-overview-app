@@ -32,7 +32,7 @@ export default (state, module) => {
   homeworkBoard.appendChild(
     linkButton(
       'all assignments',
-      `https://github.com/${state.userName}/${state.repoName}/projects/${module.project}`
+      `https://github.com/${state.userName}/${module.repoName}/projects/${module.project}`
     )
   );
   if (module.weeks) {
@@ -89,7 +89,7 @@ export default (state, module) => {
     linkButton(
       'main page',
       `https://github.com/${module.userName || state.userName}/${
-        state.repoName
+      state.repoName
       }`
     )
   );
@@ -101,7 +101,7 @@ export default (state, module) => {
         linkButton(
           `assignments`,
           `https://github.com/${module.userName || state.userName}/${
-            module.repoName
+          module.repoName
           }/tree/master/week-${i}`
         )
       );

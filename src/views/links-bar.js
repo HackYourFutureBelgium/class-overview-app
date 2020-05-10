@@ -61,6 +61,16 @@ export default state => {
   header.appendChild(document.createElement('br'));
   header.appendChild(document.createElement('br'));
 
+
+  const hyfHomeA = document.createElement('a');
+  hyfHomeA.href =
+    'https://home.hackyourfuture.be/';
+  hyfHomeA.target = '_blank';
+  const hyfHomeButton = document.createElement('button');
+  hyfHomeButton.innerHTML = 'HYF Home';
+  hyfHomeA.appendChild(hyfHomeButton);
+  header.appendChild(hyfHomeA);
+
   const homeworkSubmissionA = document.createElement('a');
   homeworkSubmissionA.href =
     'https://home.hackyourfuture.be/students/homework-submission';

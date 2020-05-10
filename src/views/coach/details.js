@@ -94,7 +94,7 @@ export default (state, coach) => {
           homeworkBoard.appendChild(document.createElement('br'));
           homeworkBoard.appendChild(linkButton(
             `all assigned week-${i}`,
-            `https://github.com/${state.userName}/${state.repoName}/projects/${module.project}/?card_filter_query=label%3Aweek-${i}`
+            `https://github.com/${state.userName}/${state.repoName}/projects/${module.project}/?card_filter_query=label%3Aweek-${i}+assignee%3A${coach.userName}`
           ));
         }
       }

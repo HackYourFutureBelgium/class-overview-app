@@ -110,10 +110,26 @@ export default (state, student) => {
       const status = document.createElement('text');
       status.innerHTML = module.status;
 
-      const homeworkProgress = linkButton(
-        'homework progress',
-        `https://github.com/${state.userName}/${state.repoName}/projects/${module.project}/?card_filter_query=author%3A${student.userName}`
-      );
+      const homeworkBoard = document.createElement('div');
+      homeworkBoard.style = 'display: inline;';
+      homeworkBoard.appendChild(linkButton(
+        'homework board',
+        `https://github.com/${state.userName}/${state.repoName}/projects/${module.project}/`
+      ));
+      homeworkBoard.appendChild(document.createElement('br'));
+      homeworkBoard.appendChild(linkButton(
+        student.userName + ': all assignments',
+        `https://github.com/${state.userName}/${state.repoName}/projects/${module.project}/?card_filter_query=assignee%3A${student.userName}`
+      ));
+      if (module.weeks) {
+        for (let i = 1; i <= module.weeks; i++) {
+          homeworkBoard.appendChild(document.createElement('br'));
+          homeworkBoard.appendChild(linkButton(
+            student.userName + `: all week-${i}`,
+            `https://github.com/${state.userName}/${state.repoName}/projects/${module.project}/?card_filter_query=label%3Aweek-${i}+assignee%3A${student.userName}`
+          ));
+        }
+      }
       const homeworkIssues = linkButton(
         'issues: homework',
         `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone%3A${module.milestone}+author%3A${student.userName}+label=homework`
@@ -140,7 +156,7 @@ export default (state, student) => {
         ? listify([status])
         : listify([
           status,
-          homeworkProgress,
+          homeworkBoard,
           homeworkIssues,
           wednesdayCheckIns,
           sundayReview,

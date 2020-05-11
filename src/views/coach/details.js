@@ -100,7 +100,7 @@ export default (state, coach) => {
       }
       const sundayReview = linkButton(
         'issues: sunday review',
-        `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone%3A${module.repoName}+label=sunday-review`
+        `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone%3A${module.repoName}+label%3Asunday-review`
       );
       const assigned = linkButton(
         'issues: assigned',

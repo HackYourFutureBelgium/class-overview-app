@@ -145,15 +145,15 @@ export default (state, student) => {
     }
     const homeworkIssues = linkButton(
       'issues: homework',
-      `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone%3A${module.repoName}+author%3A${student.userName}+label=homework`
+      `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone%3A${module.repoName}+author%3A${student.userName}+label%3Ahomework`
     );
     const wednesdayCheckIns = linkButton(
       'issues: check-ins',
-      `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone%3A${module.repoName}+author%3A${student.userName}+label=wednesday-check-in`
+      `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone%3A${module.repoName}+author%3A${student.userName}+label%3Awednesday-check-in`
     );
     const sundayReview = linkButton(
       'issues: sunday review',
-      `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone%3A${module.repoName}+author%3A${student.userName}+label=sunday-review`
+      `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone%3A${module.repoName}+author%3A${student.userName}+label%3Asunday-review`
     );
     const assigned = linkButton(
       'issues: assigned',
@@ -168,14 +168,14 @@ export default (state, student) => {
       module.status === 'to do'
         ? listify([status])
         : listify([
-            status,
-            homeworkBoard,
-            homeworkIssues,
-            wednesdayCheckIns,
-            sundayReview,
-            authored,
-            assigned,
-          ]);
+          status,
+          homeworkBoard,
+          homeworkIssues,
+          wednesdayCheckIns,
+          sundayReview,
+          authored,
+          assigned,
+        ]);
 
     moduleContainer.appendChild(linksList);
 

@@ -11,14 +11,17 @@ export default (arrOfEls, title) => {
   arrContainer.className = 'display-many-items';
   if (typeof title === 'string') arrContainer.id = title;
 
-  const container = document.createElement('div');
+  const container = document.createElement('details');
   container.id = title;
 
   if (!title) {
   } else if (typeof title === 'string') {
     const header = document.createElement('h1');
+    header.style = 'display: inline;';
     header.innerHTML = title;
-    container.appendChild(header);
+    const summary = document.createElement('summary');
+    summary.appendChild(header)
+    container.appendChild(summary);
   } else if (title instanceof Element) {
     container.appendChild(title);
   }

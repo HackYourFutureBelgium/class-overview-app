@@ -23,7 +23,10 @@ export default (arrOfEls, title) => {
     summary.appendChild(header)
     container.appendChild(summary);
   } else if (title instanceof Element) {
-    container.appendChild(title);
+    const summary = document.createElement('summary');
+    title.style.display = 'inline';
+    summary.appendChild(title)
+    container.appendChild(summary);
   }
 
   container.appendChild(arrContainer);

@@ -98,10 +98,6 @@ export default (state, coach) => {
           ));
         }
       }
-      const wednesdayCheckIns = linkButton(
-        'issues: check-ins',
-        `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone%3A${module.repoName}+label=wednesday-check-in`
-      );
       const sundayReview = linkButton(
         'issues: sunday review',
         `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone%3A${module.repoName}+label=sunday-review`
@@ -122,7 +118,6 @@ export default (state, coach) => {
 
       const linksList = listify([
         homeworkBoard,
-        wednesdayCheckIns,
         sundayReview,
         assigned,
         all,

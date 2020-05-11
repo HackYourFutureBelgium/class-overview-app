@@ -31,7 +31,7 @@ export default (state, module) => {
   homeworkBoard.innerHTML = 'homework board: ';
   homeworkBoard.appendChild(
     linkButton(
-      'all assignments',
+      'all homework',
       `https://github.com/${state.userName}/${module.repoName}/projects/${module.project}`
     )
   );
@@ -40,7 +40,7 @@ export default (state, module) => {
       homeworkBoard.appendChild(document.createElement('br'));
       homeworkBoard.appendChild(
         linkButton(
-          `assignments: week-${i}`,
+          `homework: week-${i}`,
           `https://github.com/${state.userName}/${state.repoName}/projects/${module.project}?card_filter_query=label%3Aweek-${i}`
         )
       );
@@ -114,14 +114,20 @@ export default (state, module) => {
     }
   }
 
+  const singletons = document.createElement('div');
+  singletons.appendChild(sundayReviews);
+  singletons.appendChild(document.createElement('br'));
+  singletons.appendChild(allIssues);
+  singletons.appendChild(document.createElement('br'));
+  singletons.appendChild(sharedNotes);
+
   const staticLinks = listify([
     moduleRepo,
     homeworkBoard,
     checkIns,
-    sundayReviews,
-    allIssues,
-    sharedNotes,
+    singletons
   ]);
+  staticLinks.style = 'display: flex; flex-direction: row; justify-content: space-around;';
   container.appendChild(staticLinks);
 
   // specified student links

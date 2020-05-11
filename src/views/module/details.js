@@ -32,7 +32,7 @@ export default (state, module) => {
   homeworkBoard.appendChild(
     linkButton(
       'all homework',
-      `https://github.com/${state.userName}/${module.repoName}/projects/${module.project}`
+      `https://github.com/${state.userName}/${state.repoName}/projects/${module.project}`
     )
   );
   if (module.weeks) {

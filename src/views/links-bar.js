@@ -36,7 +36,7 @@ export default state => {
     'https://github.com/' + state.userName + '/' + state.repoName + '/issues?q=label%3Asunday-review';
   sundayReviewsA.target = '_blank';
   const sundayReviewsButton = document.createElement('button');
-  sundayReviewsButton.innerHTML = 'Class Issues';
+  sundayReviewsButton.innerHTML = 'Sunday Reviews';
   sundayReviewsA.appendChild(sundayReviewsButton);
   header.appendChild(sundayReviewsA);
 

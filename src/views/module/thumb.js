@@ -37,6 +37,16 @@ export default (state, module) => {
     `https://github.com/${state.userName}/${state.repoName}/issues?q=milestone%3A${module.repoName}`
   );
 
+  const sundayReviews = linkButton(
+    'sunday reviews',
+    `https://github.com/${state.userName}/${state.repoName}/issues?q=milestone%3A${module.repoName}+label%3Asunday-review`
+  );
+
+  const wednesdayCheckIns = linkButton(
+    'wednesday check-ins',
+    `https://github.com/${state.userName}/${state.repoName}/issues?q=milestone%3A${module.repoName}+label%3Awednesday-check-in`
+  );
+
 
   const detailsButton = document.createElement('button');
   detailsButton.innerHTML = 'details';
@@ -53,9 +63,11 @@ export default (state, module) => {
     : listify([
       status,
       boardA,
+      wednesdayCheckIns,
+      sundayReviews,
       allIssues,
-      repoA,
       sharedNotesA,
+      repoA,
       detailsButton,
     ]);
 

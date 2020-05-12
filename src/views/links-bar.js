@@ -31,6 +31,15 @@ export default state => {
   boardsA.appendChild(boardsButton);
   header.appendChild(boardsA);
 
+  const sundayReviewsA = document.createElement('a');
+  sundayReviewsA.href =
+    'https://github.com/' + state.userName + '/' + state.repoName + '/issues?q=label%3Asunday-review';
+  sundayReviewsA.target = '_blank';
+  const sundayReviewsButton = document.createElement('button');
+  sundayReviewsButton.innerHTML = 'Class Issues';
+  sundayReviewsA.appendChild(sundayReviewsButton);
+  header.appendChild(sundayReviewsA);
+
   const issuesA = document.createElement('a');
   issuesA.href =
     'https://github.com/' + state.userName + '/' + state.repoName + '/issues';
@@ -44,12 +53,12 @@ export default state => {
   repoA.href = 'https://github.com/' + state.userName + '/' + state.repoName;
   repoA.target = '_blank';
   const repoButton = document.createElement('button');
-  repoButton.innerHTML = 'Class Repository';
+  repoButton.innerHTML = 'Class Repo';
   repoA.appendChild(repoButton);
   header.appendChild(repoA);
 
   const randomizerButton = document.createElement('button');
-  randomizerButton.innerHTML = 'class randomizer';
+  randomizerButton.innerHTML = 'Randomizer';
   randomizerButton.onclick = () => {
     state.currentModule = null;
     state.currentStudent = null;

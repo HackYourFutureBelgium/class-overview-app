@@ -50,7 +50,7 @@ export default (state, student) => {
   );
   const learnables = linkButton(
     'learnables',
-    `https://github.com/${student.userName}/projects`
+    `https://github.com/${student.userName}?tab=projects`
   );
 
   const issues = document.createElement('div');
@@ -64,7 +64,7 @@ export default (state, student) => {
   );
   issues.appendChild(
     linkButton(
-      'check-in',
+      'check-ins',
       `https://github.com/${state.userName}/${state.repoName}/issues?q=author%3A${student.userName}+label%3Awednesday-check-in`
     )
   );

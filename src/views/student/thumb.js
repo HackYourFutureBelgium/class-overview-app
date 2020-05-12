@@ -17,9 +17,10 @@ export default (state, student) => {
     `https://github.com/${student.userName}?tab=repositories`
   );
 
-  const personalPageLink = linkButton(
-    'portfolio',
-    `https://${student.userName}.github.io`
+
+  const learnables = linkButton(
+    'learnables',
+    `https://github.com/${student.userName}?tab=projects`
   );
 
 
@@ -58,7 +59,7 @@ export default (state, student) => {
     className,
     githubLink,
     bioLink,
-    personalPageLink,
+    learnables,
     allIssues,
     detailsEl,
   ]);

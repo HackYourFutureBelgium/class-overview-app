@@ -152,9 +152,11 @@ export default (state, module) => {
     nameComponent.className = 'student-thumb-name';
 
 
-
-    const className = document.createElement('text');
-    className.innerHTML = student.className;
+    let className = null;
+    if (student.className) {
+      className = document.createElement('text');
+      className.innerHTML = student.className;
+    };
 
     const githubLink = linkButton(
       student.userName,

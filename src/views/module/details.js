@@ -2,6 +2,9 @@ import displayMany from '../utils/display-many.js';
 import renderAvatar from '../utils/render-avatar.js';
 import linkButton from '../utils/link-button.js';
 import listify from '../utils/listify.js';
+import goTo from '../utils/goTo.js';
+import studentDetails from '../student/details.js'
+import coachDetails from '../coach/details.js'
 
 export default (state, module) => {
   history.pushState(
@@ -165,12 +168,16 @@ export default (state, module) => {
       `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone%3A${module.repoName}+assignee%3A${student.userName}`
     );
 
+
+    const detailsButton = goTo(studentDetails, [state, student], 'details');
+
     const linksList = listify([
       nameComponent,
       userNameComponent,
       homeworkProgress,
       homeworkIssues,
       assigned,
+      detailsButton
     ]);
 
     studentContainer.appendChild(linksList);
@@ -231,6 +238,9 @@ export default (state, module) => {
       }
     }
 
+
+    const detailsButton = goTo(coachDetails, [state, coach], 'details');
+
     const linksList = listify([
       nameComponent,
       role,
@@ -238,6 +248,7 @@ export default (state, module) => {
       toReview,
       allAssigned,
       allAuthored,
+      detailsButton
     ]);
 
     coachContainer.appendChild(linksList);

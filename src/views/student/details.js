@@ -3,6 +3,8 @@ import renderAvatar from '../utils/render-avatar.js';
 import renderActivity from '../utils/render-activity.js';
 import linkButton from '../utils/link-button.js';
 import listify from '../utils/listify.js';
+import goTo from '../utils/goTo.js';
+import moduleDetails from '../module/details.js'
 
 export default (state, student) => {
   history.pushState(
@@ -164,6 +166,12 @@ export default (state, student) => {
       `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone%3A${module.repoName}+author%3A${student.userName}`
     );
 
+
+
+    const detailsButton = goTo(moduleDetails, [state, module], 'details');
+
+
+
     const linksList =
       module.status === 'to do'
         ? listify([status])
@@ -175,6 +183,7 @@ export default (state, student) => {
           sundayReview,
           authored,
           assigned,
+          detailsButton
         ]);
 
     moduleContainer.appendChild(linksList);

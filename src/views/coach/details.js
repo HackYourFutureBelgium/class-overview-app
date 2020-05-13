@@ -2,6 +2,8 @@ import displayMany from '../utils/display-many.js'
 import renderAvatar from '../utils/render-avatar.js'
 import linkButton from '../utils/link-button.js'
 import listify from '../utils/listify.js'
+import goTo from '../utils/goTo.js';
+import moduleDetails from '../module/details.js'
 
 export default (state, coach) => {
   history.pushState({}, null, window.location.pathname + '?coach=' + coach.userName);
@@ -48,6 +50,7 @@ export default (state, coach) => {
     `https://github.com/${state.userName}/${state.repoName}/tree/master/coach-bios/${coach.userName}.md`
   );
 
+
   const staticLinks = listify([
     allAssigned,
     allAuthored,
@@ -67,9 +70,7 @@ export default (state, coach) => {
 
   const specifiedModules = coach.modules
     .map(module => {
-      console.log(module)
       module = Object.assign({}, module, state.modules.find(next => next.repoName === module.repoName));
-      console.log(module)
       const moduleContainer = document.createElement('div');
       moduleContainer.className = 'module-thumb';
 
@@ -116,12 +117,17 @@ export default (state, coach) => {
       );
 
 
+
+      const detailsButton = goTo(moduleDetails, [state, module], 'details');
+
+
       const linksList = listify([
         homeworkBoard,
         sundayReview,
         assigned,
         all,
-        moduleRepo
+        moduleRepo,
+        detailsButton
       ]);
 
       moduleContainer.appendChild(linksList);

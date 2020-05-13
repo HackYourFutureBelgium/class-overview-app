@@ -151,12 +151,15 @@ export default (state, module) => {
     nameComponent.innerHTML = student.name;
     nameComponent.className = 'student-thumb-name';
 
-    const userNameComponent = document.createElement('text');
-    userNameComponent.innerHTML = student.userName;
 
 
     const className = document.createElement('text');
     className.innerHTML = student.className;
+
+    const githubLink = linkButton(
+      student.userName,
+      `https://github.com/${student.userName}?tab=repositories`
+    );
 
     const homeworkProgress = linkButton(
       'homework progress',
@@ -176,12 +179,12 @@ export default (state, module) => {
     const detailsButton = goTo(studentDetails, [state, student], 'details');
 
     const linksList = listify([
-      className,
       nameComponent,
-      userNameComponent,
+      className,
       homeworkProgress,
       homeworkIssues,
       assigned,
+      githubLink,
       detailsButton
     ]);
 

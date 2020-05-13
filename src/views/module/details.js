@@ -162,7 +162,7 @@ export default (state, module) => {
 
     const assigned = linkButton(
       'all assigned issues',
-      `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone%3A${module.repoName}+assingee%3A${student.userName}`
+      `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone%3A${module.repoName}+assignee%3A${student.userName}`
     );
 
     const linksList = listify([

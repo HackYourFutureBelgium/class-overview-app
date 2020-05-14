@@ -28,7 +28,7 @@ export default (state, module) => {
 
   const sharedNotesA = linkButton(
     'shared notes',
-    `https://github.com/${state.userName}/${state.repoName}/tree/master/shared-notes/${module.repoName}.md`
+    `https://github.com/${state.userName}/${state.repoName}/tree/master/shared-notes/${module.repoName}`
   );
 
 

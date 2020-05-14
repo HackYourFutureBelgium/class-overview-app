@@ -82,7 +82,7 @@ export default (state, module) => {
   );
   const sharedNotes = linkButton(
     'shared notes',
-    `https://github.com/${state.userName}/${state.repoName}/tree/master/shared-notes/${module.repoName}.md`
+    `https://github.com/${state.userName}/${state.repoName}/tree/master/shared-notes/${module.repoName}`
   );
 
   const moduleRepo = document.createElement('div');

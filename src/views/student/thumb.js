@@ -43,6 +43,11 @@ export default (state, student) => {
     `https://github.com/${state.userName}/${state.repoName}/issues?q=author%3A${student.userName}`
   );
 
+  const portfolio = linkButton(
+    'portfolio',
+    `https://${student.userName}.github.io`
+  );
+
 
   const className = (() => {
     if (student.className) {
@@ -58,6 +63,7 @@ export default (state, student) => {
     nameComponent,
     className,
     githubLink,
+    portfolio,
     bioLink,
     learnables,
     allIssues,

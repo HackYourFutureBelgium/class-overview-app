@@ -91,7 +91,7 @@ export default (state, student) => {
   issues.appendChild(
     linkButton(
       'pull requests',
-      `https://github.com/${state.userName}/${state.repoName}/issues?q=author%3A${student.userName}+isis%3Apr`
+      `https://github.com/${state.userName}/${state.repoName}/issues?q=author%3A${student.userName}+is%3Apr`
     )
   );
 

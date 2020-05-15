@@ -51,8 +51,14 @@ export default (state, student) => {
     `https://github.com/${state.userName}/${state.repoName}/tree/master/student-bios/${student.userName}.md`
   );
   const learnables = linkButton(
-    'learnables',
+    'study boards',
     `https://github.com/${student.userName}?tab=projects`
+  );
+
+
+  const notesRepo = linkButton(
+    'notes repo',
+    `https://github.com/${student.userName}/hack-my-future`
   );
 
   const issues = document.createElement('div');
@@ -97,8 +103,9 @@ export default (state, student) => {
 
   const staticLinks = listify([
     issues,
-    learnables,
     githubLink,
+    learnables,
+    notesRepo,
     personalPageLink,
     bioLink,
   ]);

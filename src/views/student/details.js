@@ -57,7 +57,7 @@ export default (state, student) => {
 
 
   const notesRepo = linkButton(
-    'notes repo',
+    'hack-my-future',
     `https://github.com/${student.userName}/hack-my-future`
   );
 

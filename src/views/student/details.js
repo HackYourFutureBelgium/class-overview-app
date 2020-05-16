@@ -51,7 +51,7 @@ export default (state, student) => {
     `https://github.com/${state.userName}/${state.repoName}/tree/master/student-bios/${student.userName}.md`
   );
   const learnables = linkButton(
-    'study boards',
+    'learnables',
     `https://github.com/${student.userName}?tab=projects`
   );
 

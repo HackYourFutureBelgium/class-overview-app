@@ -11,6 +11,15 @@ export default (state) => {
   const container = document.createElement('div');
   container.className = 'home';
 
+
+  container.appendChild(
+    displayMany(
+      state.modules.map(module => moduleThumb(state, module)),
+      'Modules: ' + state.repoName
+    )
+  );
+  container.appendChild(document.createElement('hr'));
+  container.appendChild(document.createElement('hr'));
   container.appendChild(
     displayMany(
       state.students.map(student => studentThumb(state, student)),
@@ -23,14 +32,6 @@ export default (state) => {
     displayMany(
       state.coaches.map(coach => coachThumb(state, coach)),
       'Coaches: ' + state.repoName
-    )
-  );
-  container.appendChild(document.createElement('hr'));
-  container.appendChild(document.createElement('hr'));
-  container.appendChild(
-    displayMany(
-      state.modules.map(module => moduleThumb(state, module)),
-      'Modules: ' + state.repoName
     )
   );
 

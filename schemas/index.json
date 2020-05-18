@@ -10,6 +10,14 @@
       "type": "string",
       "description": "the name of the user/organization hosting this class repo, dynamically interpreted and added"
     },
+    "moduleOwner": {
+      "type": "string",
+      "description": "default username for the module repos, if not specified in the module data entry.  if this is missing, falls back to state.userName"
+    },
+    "domain": {
+      "type": "string",
+      "description": "domain name used to generate links to module slide shows and navbar links"
+    },
     "currentModule": {
       "type": "string",
       "description": "the name property of the module currently rendered, if empty all modules will be rendered.  This is set by user actions or url queries at load"

@@ -80,6 +80,12 @@ export default (state, module) => {
     'all issues',
     `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone%3A${module.repoName}`
   );
+
+  const classRecordings = linkButton(
+    'class recordings',
+    `https://github.com/${module.userName || state.moduleOwner || state.userName}/${module.repoName}/tree/master/class-recordings.md`
+  );
+
   const sharedNotes = linkButton(
     'shared notes',
     `https://github.com/${state.userName}/${state.repoName}/tree/master/shared-notes/${module.repoName}`
@@ -119,6 +125,8 @@ export default (state, module) => {
   singletons.appendChild(allIssues);
   singletons.appendChild(document.createElement('br'));
   singletons.appendChild(sharedNotes);
+  singletons.appendChild(document.createElement('br'));
+  singletons.appendChild(classRecordings);
 
   const staticLinks = listify([
     moduleRepo,

@@ -73,7 +73,7 @@ export default state => {
 
   const hyfHomeA = document.createElement('a');
   hyfHomeA.href =
-    'https://home.hackyourfuture.be/';
+    `https://home.${state.domain}/`;
   hyfHomeA.target = '_blank';
   const hyfHomeButton = document.createElement('button');
   hyfHomeButton.innerHTML = 'HYF Home';
@@ -82,7 +82,7 @@ export default state => {
 
   const homeworkSubmissionA = document.createElement('a');
   homeworkSubmissionA.href =
-    'https://home.hackyourfuture.be/students/homework-submission';
+    `https://home.${state.domain}/students/homework-submission`;
   homeworkSubmissionA.target = '_blank';
   const homeworkSubmissionButton = document.createElement('button');
   homeworkSubmissionButton.innerHTML = 'Homework Submission';
@@ -90,7 +90,7 @@ export default state => {
   header.appendChild(homeworkSubmissionA);
 
   const studyResourcesA = document.createElement('a');
-  studyResourcesA.href = 'https://study.hackyourfuture.be';
+  studyResourcesA.href = `https://study.${state.domain}`;
   studyResourcesA.target = '_blank';
   const studyResourcesButton = document.createElement('button');
   studyResourcesButton.innerHTML = 'Study Links';
@@ -98,7 +98,7 @@ export default state => {
   header.appendChild(studyResourcesA);
 
   const curriculumA = document.createElement('a');
-  curriculumA.href = 'https://home.hackyourfuture.be/curriculum';
+  curriculumA.href = `https://home.${state.domain}/curriculum`;
   curriculumA.target = '_blank';
   const curriculumButton = document.createElement('button');
   curriculumButton.innerHTML = 'Curriculum';
@@ -106,7 +106,7 @@ export default state => {
   header.appendChild(curriculumA);
 
   const studentGuidebookA = document.createElement('a');
-  studentGuidebookA.href = 'https://home.hackyourfuture.be/students';
+  studentGuidebookA.href = `https://home.${state.domain}/students`;
   studentGuidebookA.target = '_blank';
   const studentGuidebookButton = document.createElement('button');
   studentGuidebookButton.innerHTML = 'Student Guidebook';

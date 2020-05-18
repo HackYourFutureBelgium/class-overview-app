@@ -107,7 +107,7 @@ export default (state, module) => {
       moduleRepo.appendChild(
         linkButton(
           `lesson plan`,
-          `https://hackyourfuture.be/${module.userName || state.moduleOwner || state.userName}/week-${i}`
+          `https://${state.domain}/${module.userName || state.moduleOwner || state.userName}/week-${i}`
         )
       );
     }

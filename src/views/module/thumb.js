@@ -23,7 +23,7 @@ export default (state, module) => {
 
   const repoA = linkButton(
     'module repo',
-    `https://github.com/${module.userName || state.userName}/${module.repoName}`
+    `https://github.com/${module.userName || state.moduleOwner || state.userName}/${module.repoName}`
   );
 
   const sharedNotesA = linkButton(

@@ -1,6 +1,8 @@
 {
   "repoName": "overview-app-test",
   "userName": "hackyourfuturebelgium",
+  "moduleOwner": "hackyourfuturebelgium",
+  "domain": "hackyourfuture.be",
   "currentModule": "",
   "currentStudent": "",
   "root": null,

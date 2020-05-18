@@ -91,9 +91,7 @@ export default (state, module) => {
   moduleRepo.appendChild(
     linkButton(
       'main page',
-      `https://github.com/${module.userName || state.userName}/${
-      state.repoName
-      }`
+      `https://github.com/${module.userName || state.moduleOwner || state.userName}/${module.repoName}`
     )
   );
   if (module.weeks) {
@@ -103,15 +101,13 @@ export default (state, module) => {
       moduleRepo.appendChild(
         linkButton(
           `assignments`,
-          `https://github.com/${module.userName || state.userName}/${
-          module.repoName
-          }/tree/master/week-${i}`
+          `https://github.com/${module.userName || state.moduleOwner || state.userName}/${module.repoName}/tree/master/week-${i}`
         )
       );
       moduleRepo.appendChild(
         linkButton(
           `lesson plan`,
-          `https://hackyourfuture.be/${module.repoName}/week-${i}`
+          `https://hackyourfuture.be/${module.userName || state.moduleOwner || state.userName}/week-${i}`
         )
       );
     }

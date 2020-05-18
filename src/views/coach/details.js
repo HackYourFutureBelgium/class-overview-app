@@ -113,7 +113,7 @@ export default (state, coach) => {
       );
       const moduleRepo = linkButton(
         'module repo',
-        `https://github.com/${state.userName}/${state.repoName}`
+        `https://github.com/${module.userName || state.moduleOwner || state.userName}/${state.repoName}`
       );
 
 

@@ -49,12 +49,12 @@ export default (state, coach) => {
 
   const coachInfo = listify([
     nameComponent,
-    ...modules,
+    userName,
     githubLink,
     // bioLink,
     assignedIssues,
-    userName,
     detailsButton,
+    ...modules,
   ]);
 
   const container = document.createElement('div');

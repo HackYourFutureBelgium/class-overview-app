@@ -65,8 +65,8 @@ export default (state, student) => {
 
   const studentInfo = listify([
     nameComponent,
-    className,
     userName,
+    className,
     githubLink,
     portfolio,
     // bioLink,

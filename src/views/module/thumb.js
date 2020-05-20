@@ -65,8 +65,8 @@ export default (state, module) => {
       boardA,
       wednesdayCheckIns,
       sundayReviews,
-      allIssues,
-      sharedNotesA,
+      // allIssues,
+      // sharedNotesA,
       repoA,
       detailsButton,
     ]);

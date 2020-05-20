@@ -13,7 +13,7 @@ export default (state, coach) => {
   nameComponent.className = 'student-thumb-name';
 
   const githubLink = linkButton(
-    coach.userName,
+    'on github',
     `https://github.com/${coach.userName}`
   );
 
@@ -43,12 +43,17 @@ export default (state, coach) => {
       return text;
     });
 
+  const userName = document.createElement('text');
+  userName.innerHTML = coach.userName;
+
+
   const coachInfo = listify([
     nameComponent,
-    githubLink,
-    bioLink,
-    assignedIssues,
     ...modules,
+    githubLink,
+    // bioLink,
+    assignedIssues,
+    userName,
     detailsButton,
   ]);
 

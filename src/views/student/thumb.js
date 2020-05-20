@@ -13,7 +13,7 @@ export default (state, student) => {
   nameComponent.className = 'student-thumb-name';
 
   const githubLink = linkButton(
-    student.userName,
+    'repositories',
     `https://github.com/${student.userName}?tab=repositories`
   );
 
@@ -59,13 +59,18 @@ export default (state, student) => {
     }
   })();
 
+  const userName = document.createElement('text');
+  userName.innerHTML = student.userName;
+
+
   const studentInfo = listify([
     nameComponent,
     className,
+    userName,
     githubLink,
     portfolio,
-    bioLink,
-    learnables,
+    // bioLink,
+    // learnables,
     allIssues,
     detailsEl,
   ]);

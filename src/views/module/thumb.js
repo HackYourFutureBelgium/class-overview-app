@@ -21,10 +21,32 @@ export default (state, module) => {
     `https://github.com/${state.userName}/${state.repoName}/projects/${module.project}`
   );
 
-  const repoA = linkButton(
-    'module repo',
-    `https://github.com/${module.userName || state.moduleOwner || state.userName}/${module.repoName}`
+  const moduleRepo = document.createElement('div');
+  moduleRepo.style = 'display: inline;';
+  moduleRepo.appendChild(
+    linkButton(
+      'module repo',
+      `https://github.com/${module.userName || state.moduleOwner || state.userName}/${module.repoName}`
+    )
   );
+  if (module.weeks) {
+    for (let i = 1; i <= module.weeks; i++) {
+      moduleRepo.appendChild(document.createElement('br'));
+      moduleRepo.appendChild(document.createTextNode(`week ${i}:`));
+      moduleRepo.appendChild(
+        linkButton(
+          `assignments`,
+          `https://github.com/${module.userName || state.moduleOwner || state.userName}/${module.repoName}/tree/master/week-${i}`
+        )
+      );
+      moduleRepo.appendChild(
+        linkButton(
+          `lesson plan`,
+          `https://${state.domain}/${module.userName || state.moduleOwner || state.userName}/week-${i}`
+        )
+      );
+    }
+  }
 
   const sharedNotesA = linkButton(
     'shared notes',
@@ -65,9 +87,7 @@ export default (state, module) => {
       boardA,
       wednesdayCheckIns,
       sundayReviews,
-      // allIssues,
-      // sharedNotesA,
-      repoA,
+      moduleRepo,
       detailsButton,
     ]);
 

@@ -22,14 +22,14 @@ export default state => {
   overviewButton.onclick = toHome;
   header.appendChild(overviewButton);
 
-  const boardsA = document.createElement('a');
-  boardsA.href =
-    'https://github.com/' + state.userName + '/' + state.repoName + '/projects';
-  boardsA.target = '_blank';
-  const boardsButton = document.createElement('button');
-  boardsButton.innerHTML = 'Class HW Boards';
-  boardsA.appendChild(boardsButton);
-  header.appendChild(boardsA);
+  // const boardsA = document.createElement('a');
+  // boardsA.href =
+  //   'https://github.com/' + state.userName + '/' + state.repoName + '/projects';
+  // boardsA.target = '_blank';
+  // const boardsButton = document.createElement('button');
+  // boardsButton.innerHTML = 'Class HW Boards';
+  // boardsA.appendChild(boardsButton);
+  // header.appendChild(boardsA);
 
   const sundayReviewsA = document.createElement('a');
   sundayReviewsA.href =

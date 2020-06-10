@@ -35,7 +35,7 @@ export default (state, module) => {
       moduleRepo.appendChild(
         linkButton(
           `lesson plan`,
-          `https://${state.domain}/${module.userName || state.moduleOwner || state.userName}/week-${i}`
+          `https://${state.domain}/${module.repoName || state.moduleOwner || state.userName}/week-${i}`
         )
       );
       moduleRepo.appendChild(document.createElement('br'));

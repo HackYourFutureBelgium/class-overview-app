@@ -40,12 +40,21 @@ export default state => {
   sundayReviewsA.appendChild(sundayReviewsButton);
   header.appendChild(sundayReviewsA);
 
+  const rollCallA = document.createElement('a');
+  rollCallA.href =
+    'https://github.com/' + state.userName + '/' + state.repoName + '/issues?q=label%3Aroll-call';
+  rollCallA.target = '_blank';
+  const rollCallButton = document.createElement('button');
+  rollCallButton.innerHTML = 'Roll Calls';
+  rollCallA.appendChild(rollCallButton);
+  header.appendChild(rollCallA);
+
   const issuesA = document.createElement('a');
   issuesA.href =
     'https://github.com/' + state.userName + '/' + state.repoName + '/issues';
   issuesA.target = '_blank';
   const issuesButton = document.createElement('button');
-  issuesButton.innerHTML = 'Class Issues';
+  issuesButton.innerHTML = 'Issues';
   issuesA.appendChild(issuesButton);
   header.appendChild(issuesA);
 
@@ -53,7 +62,7 @@ export default state => {
   repoA.href = 'https://github.com/' + state.userName + '/' + state.repoName;
   repoA.target = '_blank';
   const repoButton = document.createElement('button');
-  repoButton.innerHTML = 'Class Repo';
+  repoButton.innerHTML = 'Repo';
   repoA.appendChild(repoButton);
   header.appendChild(repoA);
 

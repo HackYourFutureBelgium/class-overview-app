@@ -23,6 +23,13 @@ export default (state, module) => {
 
   const moduleRepo = document.createElement('div');
   moduleRepo.style = 'display: inline;';
+  moduleRepo.appendChild(
+    linkButton(
+      'module repo',
+      `https://github.com/${module.userName || state.moduleOwner || state.userName}/${module.repoName}`
+    )
+  );
+  moduleRepo.appendChild(document.createElement('br'));
   if (module.weeks) {
     for (let i = 1; i <= module.weeks; i++) {
       moduleRepo.appendChild(document.createTextNode(`week ${i}:`));
@@ -41,12 +48,6 @@ export default (state, module) => {
       moduleRepo.appendChild(document.createElement('br'));
     }
   }
-  moduleRepo.appendChild(
-    linkButton(
-      'module repo',
-      `https://github.com/${module.userName || state.moduleOwner || state.userName}/${module.repoName}`
-    )
-  );
 
   const sharedNotesA = linkButton(
     'shared notes',
@@ -84,10 +85,11 @@ export default (state, module) => {
     ? listify([status])
     : listify([
       status,
-      boardA,
       moduleRepo,
+      boardA,
       wednesdayCheckIns,
       sundayReviews,
+      sharedNotesA,
       detailsButton,
     ]);
 

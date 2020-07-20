@@ -31,6 +31,15 @@ export default state => {
   // boardsA.appendChild(boardsButton);
   // header.appendChild(boardsA);
 
+  const helpWantedA = document.createElement('a');
+  helpWantedA.href =
+    'https://github.com/' + state.userName + '/' + state.repoName + '/issues?q=label%3Ahelp-wanted';
+  helpWantedA.target = '_blank';
+  const helpWantedButton = document.createElement('button');
+  helpWantedButton.innerHTML = 'Help Wanted';
+  helpWantedA.appendChild(helpWantedButton);
+  header.appendChild(helpWantedA);
+
   const sundayReviewsA = document.createElement('a');
   sundayReviewsA.href =
     'https://github.com/' + state.userName + '/' + state.repoName + '/issues?q=label%3Asunday-review';

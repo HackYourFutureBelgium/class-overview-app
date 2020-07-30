@@ -35,6 +35,11 @@ export default (state, coach) => {
     `https://github.com/${state.userName}/${state.repoName}/issues?q=assignee%3A${coach.userName}`
   );
 
+  const authoredIssues = linkButton(
+    'assigned issues',
+    `https://github.com/${state.userName}/${state.repoName}/issues?q=author%3A${coach.userName}`
+  );
+
 
   const modules = coach.modules
     .map(next => {
@@ -51,9 +56,10 @@ export default (state, coach) => {
     nameComponent,
     userName,
     githubLink,
-    // bioLink,
+    bioLink,
     assignedIssues,
-    detailsButton,
+    authoredIssues,
+    // detailsButton,
     ...modules,
   ]);
 

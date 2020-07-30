@@ -5,6 +5,7 @@ import linkButton from '../utils/link-button.js';
 import listify from '../utils/listify.js';
 import goTo from '../utils/goTo.js';
 import moduleDetails from '../module/details.js'
+import moduleDetailsNew from '../module-new/details.js'
 
 export default (state, student) => {
   history.pushState(
@@ -66,6 +67,18 @@ export default (state, student) => {
   issues.innerHTML = 'class issues: ';
   issues.appendChild(
     linkButton(
+      'individual ',
+      `https://github.com/${state.userName}/${state.repoName}/issues?q=author%3A${student.userName}+label%3Aindividual`
+    )
+  );
+  issues.appendChild(
+    linkButton(
+      'group ',
+      `https://github.com/${state.userName}/${state.repoName}/issues?q=assigned%3A${student.userName}+label%3Agroup`
+    )
+  );
+  issues.appendChild(
+    linkButton(
       'homework ',
       `https://github.com/${state.userName}/${state.repoName}/issues?q=author%3A${student.userName}+label%3Ahomework`
     )
@@ -76,12 +89,8 @@ export default (state, student) => {
       `https://github.com/${state.userName}/${state.repoName}/issues?q=author%3A${student.userName}+label%3Awednesday-check-in`
     )
   );
-  issues.appendChild(
-    linkButton(
-      'sunday review',
-      `https://github.com/${state.userName}/${state.repoName}/issues?q=author%3A${student.userName}+label%3Asunday-review`
-    )
-  );
+  issues.appendChild(document.createElement('br'));
+  issues.appendChild(document.createTextNode('   '));
   issues.appendChild(
     linkButton(
       'authored',
@@ -122,80 +131,152 @@ export default (state, student) => {
   specifiedTitle.innerHTML = `${student.name}: Module Links`;
 
   const specifiedModules = state.modules.map(module => {
-    const moduleContainer = document.createElement('div');
-    moduleContainer.className = 'module-thumb';
+    if (module.repo === 'new') {
+      const moduleContainer = document.createElement('div');
+      moduleContainer.className = 'module-thumb';
 
-    const moduleName = document.createElement('h3');
-    moduleName.innerHTML =
-      (module.number ? module.number + '. ' : '') + module.repoName;
-    moduleContainer.appendChild(moduleName);
+      const moduleName = document.createElement('h3');
+      moduleName.innerHTML =
+        (module.number ? module.number + '. ' : '') + module.repoName;
+      moduleContainer.appendChild(moduleName);
 
-    const status = document.createElement('text');
-    status.innerHTML = module.status;
+      const status = document.createElement('text');
+      status.innerHTML = module.status;
 
-    const homeworkBoard = document.createElement('div');
-    homeworkBoard.style = 'display: inline;';
-    homeworkBoard.appendChild(
-      linkButton(
-        `homework board: ${student.userName}`,
-        `https://github.com/${state.userName}/${state.repoName}/projects/${module.project}/?card_filter_query=author%3A${student.userName}`
-      )
-    );
-    if (module.weeks) {
-      for (let i = 1; i <= module.weeks; i++) {
-        homeworkBoard.appendChild(document.createElement('br'));
-        homeworkBoard.appendChild(
-          linkButton(
-            student.userName + `: week-${i}`,
-            `https://github.com/${state.userName}/${state.repoName}/projects/${module.project}/?card_filter_query=label%3Aweek-${i}+author%3A${student.userName}`
-          )
-        );
+      const homeworkBoard = document.createElement('div');
+      homeworkBoard.style = 'display: inline;';
+      homeworkBoard.appendChild(
+        linkButton(
+          `project board: ${student.userName}`,
+          `https://github.com/${state.userName}/${state.repoName}/projects/${module.project}/?card_filter_query=assigned%3A${student.userName}`
+        )
+      );
+      if (module.weeks) {
+        for (let i = 1; i <= module.weeks; i++) {
+          homeworkBoard.appendChild(document.createElement('br'));
+          homeworkBoard.appendChild(
+            linkButton(
+              `week-${i}`,
+              `https://github.com/${state.userName}/${state.repoName}/projects/${module.project}/?card_filter_query=label%3Aweek-${i}+author%3A${student.userName}`
+            )
+          );
+        }
       }
+      const individualIssue = linkButton(
+        'issues: individual',
+        `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone%3A${module.repoName}+author%3A${student.userName}+label%3Aindividual`
+      );
+      const groupIssues = linkButton(
+        'issues: group',
+        `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone%3A${module.repoName}+author%3A${student.userName}+label%3Awednesday-check-in`
+      );
+      const assigned = linkButton(
+        'issues: assigned',
+        `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone%3A${module.repoName}+assignee%3A${student.userName}`
+      );
+      const authored = linkButton(
+        'issues: authored',
+        `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone%3A${module.repoName}+author%3A${student.userName}`
+      );
+
+
+      debugger
+      const detailsButton = module.repo === 'new'
+        ? goTo(moduleDetailsNew, [state, module], 'details')
+        : goTo(moduleDetails, [state, module], 'details');
+
+
+
+      const linksList =
+        module.status === 'to do'
+          ? listify([status])
+          : listify([
+            status,
+            homeworkBoard,
+            individualIssue,
+            groupIssues,
+            // sundayReview,
+            authored,
+            assigned,
+            detailsButton
+          ]);
+
+      moduleContainer.appendChild(linksList);
+
+      return moduleContainer;
+    } else {
+      const moduleContainer = document.createElement('div');
+      moduleContainer.className = 'module-thumb';
+
+      const moduleName = document.createElement('h3');
+      moduleName.innerHTML =
+        (module.number ? module.number + '. ' : '') + module.repoName;
+      moduleContainer.appendChild(moduleName);
+
+      const status = document.createElement('text');
+      status.innerHTML = module.status;
+
+      const homeworkBoard = document.createElement('div');
+      homeworkBoard.style = 'display: inline;';
+      homeworkBoard.appendChild(
+        linkButton(
+          `homework board: ${student.userName}`,
+          `https://github.com/${state.userName}/${state.repoName}/projects/${module.project}/?card_filter_query=author%3A${student.userName}`
+        )
+      );
+      if (module.weeks) {
+        for (let i = 1; i <= module.weeks; i++) {
+          homeworkBoard.appendChild(document.createElement('br'));
+          homeworkBoard.appendChild(
+            linkButton(
+              student.userName + `: week-${i}`,
+              `https://github.com/${state.userName}/${state.repoName}/projects/${module.project}/?card_filter_query=label%3Aweek-${i}+author%3A${student.userName}`
+            )
+          );
+        }
+      }
+      const homeworkIssues = linkButton(
+        'issues: homework',
+        `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone%3A${module.repoName}+author%3A${student.userName}+label%3Ahomework`
+      );
+      const wednesdayCheckIns = linkButton(
+        'issues: check-ins',
+        `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone%3A${module.repoName}+author%3A${student.userName}+label%3Awednesday-check-in`
+      );
+      const assigned = linkButton(
+        'issues: assigned',
+        `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone%3A${module.repoName}+assignee%3A${student.userName}`
+      );
+      const authored = linkButton(
+        'issues: authored',
+        `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone%3A${module.repoName}+author%3A${student.userName}`
+      );
+
+
+
+      const detailsButton = goTo(moduleDetails, [state, module], 'details');
+
+
+
+      const linksList =
+        module.status === 'to do'
+          ? listify([status])
+          : listify([
+            status,
+            homeworkBoard,
+            homeworkIssues,
+            wednesdayCheckIns,
+            // sundayReview,
+            authored,
+            assigned,
+            detailsButton
+          ]);
+
+      moduleContainer.appendChild(linksList);
+
+      return moduleContainer;
+
     }
-    const homeworkIssues = linkButton(
-      'issues: homework',
-      `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone%3A${module.repoName}+author%3A${student.userName}+label%3Ahomework`
-    );
-    const wednesdayCheckIns = linkButton(
-      'issues: check-ins',
-      `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone%3A${module.repoName}+author%3A${student.userName}+label%3Awednesday-check-in`
-    );
-    const sundayReview = linkButton(
-      'issues: sunday review',
-      `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone%3A${module.repoName}+author%3A${student.userName}+label%3Asunday-review`
-    );
-    const assigned = linkButton(
-      'issues: assigned',
-      `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone%3A${module.repoName}+assignee%3A${student.userName}`
-    );
-    const authored = linkButton(
-      'issues: authored',
-      `https://github.com/${state.userName}/${state.repoName}/issues/?q=milestone%3A${module.repoName}+author%3A${student.userName}`
-    );
-
-
-
-    const detailsButton = goTo(moduleDetails, [state, module], 'details');
-
-
-
-    const linksList =
-      module.status === 'to do'
-        ? listify([status])
-        : listify([
-          status,
-          homeworkBoard,
-          homeworkIssues,
-          wednesdayCheckIns,
-          sundayReview,
-          authored,
-          assigned,
-          detailsButton
-        ]);
-
-    moduleContainer.appendChild(linksList);
-
-    return moduleContainer;
   });
 
   const perModule = displayMany(specifiedModules, specifiedTitle);

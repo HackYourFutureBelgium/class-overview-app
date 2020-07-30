@@ -1,5 +1,6 @@
 import displayMany from './utils/display-many.js';
 import moduleThumb from './module/thumb.js';
+import moduleThumbNew from './module-new/thumb.js';
 import studentThumb from './student/thumb.js';
 import coachThumb from './coach/thumb.js';
 
@@ -14,7 +15,13 @@ export default (state) => {
 
   container.appendChild(
     displayMany(
-      state.modules.map(module => moduleThumb(state, module)),
+      state.modules.map(module => {
+        if (module.repo === 'new') {
+          return moduleThumbNew(state, module);
+        } else {
+          return moduleThumb(state, module);
+        };
+      }),
       'Modules: ' + state.repoName
     )
   );

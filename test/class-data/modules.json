@@ -30,7 +30,8 @@
     "status": "in progress",
     "board": 3,
     "milestone": 1,
-    "weeks": 3
+    "weeks": 3,
+    "repo": "new"
   },
   {
     "number": 3,
